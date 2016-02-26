@@ -37,3 +37,14 @@ CREATE TABLE "CarRental"."Extras"
 WITH (
   OIDS=FALSE
 );
+CREATE TABLE "CarRental"."Branches"
+(
+   "bID" integer NOT NULL, 
+   address character varying NOT NULL, 
+   PRIMARY KEY ("bID")
+) 
+WITH (
+  OIDS = FALSE
+)
+;
+
