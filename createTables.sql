@@ -1,3 +1,5 @@
+CREATE SCHEMA "CarRental";
+
 CREATE TABLE "CarRental"."Users"
 (
    "uID" integer NOT NULL, 
