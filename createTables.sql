@@ -26,3 +26,14 @@ WITH (
   OIDS = FALSE
 )
 ;
+CREATE TABLE "CarRental"."Extras"
+(
+  "eID" integer NOT NULL,
+  name character varying NOT NULL,
+  description text,
+  "costPerDay" double precision,
+  CONSTRAINT "Extras_pkey" PRIMARY KEY ("eID")
+)
+WITH (
+  OIDS=FALSE
+);
