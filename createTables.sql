@@ -12,3 +12,15 @@ WITH (
   OIDS = FALSE
 )
 ;
+
+CREATE TABLE "CarRental"."InsurancePolicy"
+(
+   "typeOfCoverage" character varying NOT NULL, 
+   price double precision NOT NULL, 
+   description text, 
+   PRIMARY KEY ("typeOfCoverage")
+) 
+WITH (
+  OIDS = FALSE
+)
+;
