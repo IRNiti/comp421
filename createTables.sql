@@ -64,5 +64,24 @@ WITH (
   OIDS = FALSE
 )
 ;
+CREATE TABLE "CarRental"."Reservations"
+(
+   "rID" integer NOT NULL, 
+   "licenseNumber" character varying NOT NULL, 
+   "pickUpDate" date NOT NULL, 
+   "returnDate" date, 
+   "isReturned" boolean NOT NULL DEFAULT False, 
+   "uID" integer NOT NULL, 
+   "vID" integer NOT NULL, 
+   "typeOfCovergae" character varying NOT NULL, 
+   PRIMARY KEY ("rID"), 
+   FOREIGN KEY ("uID") REFERENCES "CarRental"."Users" ("uID") ON UPDATE NO ACTION ON DELETE NO ACTION, 
+   FOREIGN KEY ("vID") REFERENCES "CarRental"."Vehicles" ("vID") ON UPDATE NO ACTION ON DELETE NO ACTION, 
+   FOREIGN KEY ("typeOfCovergae") REFERENCES "CarRental"."InsurancePolicy" ("typeOfCoverage") ON UPDATE NO ACTION ON DELETE NO ACTION
+) 
+WITH (
+  OIDS = FALSE
+)
+;
 
 
