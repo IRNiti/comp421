@@ -47,4 +47,22 @@ WITH (
   OIDS = FALSE
 )
 ;
+CREATE TABLE "CarRental"."Vehicles"
+(
+   "vID" integer NOT NULL, 
+   make character varying NOT NULL, 
+   model character varying NOT NULL, 
+   "passCapacity" integer NOT NULL, 
+   "costPerDay" double precision, 
+   type character varying NOT NULL, 
+   transmission character varying NOT NULL, 
+   "bID" integer NOT NULL, 
+   PRIMARY KEY ("vID"), 
+   FOREIGN KEY ("bID") REFERENCES "CarRental"."Branches" ("bID") ON UPDATE NO ACTION ON DELETE NO ACTION
+) 
+WITH (
+  OIDS = FALSE
+)
+;
+
 
