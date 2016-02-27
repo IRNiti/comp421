@@ -129,7 +129,7 @@ CREATE TABLE "cs421g04"."Review"
   "userName" VARCHAR(30) NOT NULL,
   "text"     TEXT        NOT NULL,
   "date"     DATE        NOT NULL,
-  "rating"   INTEGER     NOT NULL CHECK ("rating" >= 0 && rating <= 5),
+  "rating"   INTEGER     NOT NULL CHECK ("rating" >= 0 AND "rating" <= 5),
   PRIMARY KEY ("vID", "userName")
 )
 WITH (
