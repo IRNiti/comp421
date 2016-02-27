@@ -1,6 +1,5 @@
-CREATE SCHEMA "CarRental";
 
-CREATE TABLE "CarRental"."Users"
+CREATE TABLE "cs421g04"."Users"
 (
    "uID" integer NOT NULL, 
    name character varying NOT NULL, 
@@ -15,7 +14,7 @@ WITH (
 )
 ;
 
-CREATE TABLE "CarRental"."InsurancePolicy"
+CREATE TABLE "cs421g04"."InsurancePolicy"
 (
    "typeOfCoverage" character varying NOT NULL, 
    price double precision NOT NULL, 
@@ -26,7 +25,7 @@ WITH (
   OIDS = FALSE
 )
 ;
-CREATE TABLE "CarRental"."Extras"
+CREATE TABLE "cs421g04"."Extras"
 (
   "eID" integer NOT NULL,
   name character varying NOT NULL,
@@ -37,7 +36,7 @@ CREATE TABLE "CarRental"."Extras"
 WITH (
   OIDS=FALSE
 );
-CREATE TABLE "CarRental"."Branches"
+CREATE TABLE "cs421g04"."Branches"
 (
    "bID" integer NOT NULL, 
    address character varying NOT NULL, 
@@ -47,7 +46,7 @@ WITH (
   OIDS = FALSE
 )
 ;
-CREATE TABLE "CarRental"."Vehicles"
+CREATE TABLE "cs421g04"."Vehicles"
 (
    "vID" integer NOT NULL, 
    make character varying NOT NULL, 
@@ -58,13 +57,13 @@ CREATE TABLE "CarRental"."Vehicles"
    transmission character varying NOT NULL, 
    "bID" integer NOT NULL, 
    PRIMARY KEY ("vID"), 
-   FOREIGN KEY ("bID") REFERENCES "CarRental"."Branches" ("bID") ON UPDATE NO ACTION ON DELETE NO ACTION
+   FOREIGN KEY ("bID") REFERENCES "cs421g04"."Branches" ("bID") ON UPDATE NO ACTION ON DELETE NO ACTION
 ) 
 WITH (
   OIDS = FALSE
 )
 ;
-CREATE TABLE "CarRental"."Reservations"
+CREATE TABLE "cs421g04"."Reservations"
 (
    "rID" integer NOT NULL, 
    "licenseNumber" character varying NOT NULL, 
@@ -75,9 +74,9 @@ CREATE TABLE "CarRental"."Reservations"
    "vID" integer NOT NULL, 
    "typeOfCovergae" character varying NOT NULL, 
    PRIMARY KEY ("rID"), 
-   FOREIGN KEY ("uID") REFERENCES "CarRental"."Users" ("uID") ON UPDATE NO ACTION ON DELETE NO ACTION, 
-   FOREIGN KEY ("vID") REFERENCES "CarRental"."Vehicles" ("vID") ON UPDATE NO ACTION ON DELETE NO ACTION, 
-   FOREIGN KEY ("typeOfCovergae") REFERENCES "CarRental"."InsurancePolicy" ("typeOfCoverage") ON UPDATE NO ACTION ON DELETE NO ACTION
+   FOREIGN KEY ("uID") REFERENCES "cs421g04"."Users" ("uID") ON UPDATE NO ACTION ON DELETE NO ACTION, 
+   FOREIGN KEY ("vID") REFERENCES "cs421g04"."Vehicles" ("vID") ON UPDATE NO ACTION ON DELETE NO ACTION, 
+   FOREIGN KEY ("typeOfCovergae") REFERENCES "cs421g04"."InsurancePolicy" ("typeOfCoverage") ON UPDATE NO ACTION ON DELETE NO ACTION
 ) 
 WITH (
   OIDS = FALSE
