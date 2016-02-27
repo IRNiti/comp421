@@ -1,6 +1,7 @@
+CREATE SEQUENCE unique_userid;
 CREATE TABLE "cs421g04"."Users"
 (
-  "uID"       INTEGER           NOT NULL,
+  "uID"       INTEGER           NOT NULL DEFAULT nextval('unique_userid'),
   name        CHARACTER VARYING NOT NULL,
   address     CHARACTER VARYING NOT NULL,
   email       CHARACTER VARYING NOT NULL,
@@ -23,9 +24,10 @@ WITH (
 OIDS = FALSE
 );
 
+CREATE SEQUENCE unique_eid;
 CREATE TABLE "cs421g04"."Extras"
 (
-  "eID"        INTEGER           NOT NULL,
+  "eID"        INTEGER           NOT NULL DEFAULT nextval('unique_eid'),
   name         CHARACTER VARYING NOT NULL,
   description  TEXT,
   "costPerDay" DOUBLE PRECISION,
@@ -35,9 +37,10 @@ WITH (
 OIDS =FALSE
 );
 
+CREATE SEQUENCE unique_bid;
 CREATE TABLE "cs421g04"."Branches"
 (
-  "bID"   INTEGER           NOT NULL,
+  "bID"   INTEGER           NOT NULL DEFAULT nextval('unique_bid'),
   address CHARACTER VARYING NOT NULL,
   PRIMARY KEY ("bID")
 )
@@ -45,9 +48,10 @@ WITH (
 OIDS = FALSE
 );
 
+CREATE SEQUENCE unique_vid;
 CREATE TABLE "cs421g04"."Vehicles"
 (
-  "vID"          INTEGER           NOT NULL,
+  "vID"          INTEGER           NOT NULL DEFAULT nextval('unique_vid'),
   make           CHARACTER VARYING NOT NULL,
   model          CHARACTER VARYING NOT NULL,
   "passCapacity" INTEGER           NOT NULL,
@@ -62,9 +66,10 @@ WITH (
 OIDS = FALSE
 );
 
+CREATE SEQUENCE unique_rid;
 CREATE TABLE "cs421g04"."Reservations"
 (
-  "rID"            INTEGER           NOT NULL,
+  "rID"            INTEGER           NOT NULL DEFAULT nextval('unique_rid'),
   "licenseNumber"  CHARACTER VARYING NOT NULL,
   "pickUpDate"     DATE              NOT NULL,
   "returnDate"     DATE,
@@ -81,9 +86,10 @@ WITH (
 OIDS = FALSE
 );
 
+CREATE SEQUENCE unique_billid;
 CREATE TABLE "cs421g04"."Bill"
 (
-  "billID"        INTEGER           NOT NULL,
+  "billID"        INTEGER           NOT NULL DEFAULT nextval('unique_billid'),
   "amount"        DOUBLE PRECISION  NOT NULL,
   "date"          DATE              NOT NULL,
   "paymentMethod" CHARACTER VARYING NOT NULL,
@@ -111,9 +117,10 @@ WITH (
 OIDS = FALSE
 );
 
+CREATE SEQUENCE unique_damid;
 CREATE TABLE "cs421g04"."Damage"
 (
-  "dID"         INTEGER NOT NULL PRIMARY KEY,
+  "dID"         INTEGER NOT NULL PRIMARY KEY DEFAULT nextval('unique_damid'),
   "vID"         INTEGER NOT NULL,
   "description" TEXT    NOT NULL,
   "date"        DATE    NOT NULL,
