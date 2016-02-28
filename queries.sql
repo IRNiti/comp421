@@ -1,4 +1,4 @@
-/* Get all premium users who have damaged their car but have an insurance policy */
+﻿/* Get all premium users who have damaged their car but have an insurance policy */
 SELECT
   "Users"."uID",
   "Users".name,
@@ -31,8 +31,18 @@ SELECT
 FROM 
   "cs421g04"."Damage" INNER JOIN "cs421g04"."Vehicles" ON ("cs421g04"."Damage"."vID" = "cs421g04"."Vehicles"."vID") 
 WHERE transmission = 'Manual';
+
 -- Get the amount of cars at every branch
 SELECT "Branches".address,COUNT("Vehicles"."bID") AS NumberOfVehicles FROM cs421g04."Vehicles"
 LEFT  JOIN cs421g04."Branches"
 ON "Branches"."bID"="Vehicles"."bID"
 GROUP BY address;
+
+-- Get all the users that reserved a particular vehicle ordered by the vID
+SELECT "Reservations"."vID","Users"."name"
+FROM "cs421g04"."Reservations"
+  INNER JOIN "cs421g04"."Users" ON "Users"."uID" = "Reservations"."uID"
+WHERE "Reservations"."uID" in (SELECT "Reservations"."uID"
+			FROM "cs421g04"."Reservations"
+			WHERE "Reservations"."vID" > 0)
+ORDER BY "Reservations"."vID";

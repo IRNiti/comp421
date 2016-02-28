@@ -1,4 +1,4 @@
-INSERT INTO "cs421g04"."Branches" (address) VALUES ('475 President Kennedy');
+﻿INSERT INTO "cs421g04"."Branches" (address) VALUES ('475 President Kennedy');
 INSERT INTO "cs421g04"."Branches" (address) VALUES ('5960 Boulevard Decarie');
 INSERT INTO "cs421g04"."Branches" (address) VALUES ('1717 Rue Berri');
 INSERT INTO "cs421g04"."Branches" (address) VALUES ('3480 Boulevard Des Sources');
@@ -29,11 +29,18 @@ INSERT INTO "cs421g04"."InsurancePolicy" ("typeOfCoverage", price, description) 
 INSERT INTO "cs421g04"."InsurancePolicy" ("typeOfCoverage", price, description) VALUES ('personal accident insurance', 100, 'Personal Accident Insurance (PAI) provides accidental death benefits and emergency medical expense benefits to the renter and all passengers in the car');
 INSERT INTO "cs421g04"."InsurancePolicy" ("typeOfCoverage", price, description) VALUES ('personal effects coverage', 125, 'Personal Effects Protection insures the personal belongings of the renter and the immediate family members who are traveling with the renter.');
 
-INSERT INTO "cs421g04"."Reservations" ("licenseNumber", "pickUpDate", "returnDate", "isReturned", "uID", "vID", "typeOfCoverage") VALUES ('A1234-123456-01', '2016-02-27 13:45:16', '2016-02-29 13:45:16', '0', 1, 1, 'N/A');
-INSERT INTO "cs421g04"."Reservations" ("licenseNumber", "pickUpDate", "returnDate", "isReturned", "uID", "vID", "typeOfCoverage") VALUES ('A1235-123456-01', '2016-02-24 13:45:16', '2016-02-27 13:45:16', '0', 2, 3, 'loss-damage waiver');
-INSERT INTO "cs421g04"."Reservations" ("licenseNumber", "pickUpDate", "returnDate", "isReturned", "uID", "vID", "typeOfCoverage") VALUES ('A1231-123456-01', '2016-02-27 13:45:16', '2016-03-01 13:45:16', '0', 3, 5, 'liability coverage');
-INSERT INTO "cs421g04"."Reservations" ("licenseNumber", "pickUpDate", "returnDate", "isReturned", "uID", "vID", "typeOfCoverage") VALUES ('A1238-123456-01', '2016-02-27 13:45:16', '2016-03-04 13:45:16', '0', 4, 7, 'personal accident insurance');
-INSERT INTO "cs421g04"."Reservations" ("licenseNumber", "pickUpDate", "returnDate", "isReturned", "uID", "vID", "typeOfCoverage") VALUES ('A1239-123456-01', '2016-02-27 13:45:16', '2016-02-29 13:45:16', '0', 5, 9, 'personal effects coverage');
+INSERT INTO "cs421g04"."Reservations" ("licenseNumber", "pickUpDate", "returnDate", "isReturned", "uID", "vID", "typeOfCoverage") VALUES ('A1234-071182-01', '2016-02-27 13:45:16', '2016-02-29 13:45:16', '0', 1, 1, 'N/A');
+INSERT INTO "cs421g04"."Reservations" ("licenseNumber", "pickUpDate", "returnDate", "isReturned", "uID", "vID", "typeOfCoverage") VALUES ('A1235-170495-11', '2016-02-24 13:45:16', '2016-02-27 13:45:16', '0', 2, 3, 'loss-damage waiver');
+INSERT INTO "cs421g04"."Reservations" ("licenseNumber", "pickUpDate", "returnDate", "isReturned", "uID", "vID", "typeOfCoverage") VALUES ('A1231-280289-05', '2016-02-27 13:45:16', '2016-03-01 13:45:16', '0', 3, 5, 'liability coverage');
+INSERT INTO "cs421g04"."Reservations" ("licenseNumber", "pickUpDate", "returnDate", "isReturned", "uID", "vID", "typeOfCoverage") VALUES ('A1238-301273-09', '2016-02-27 13:45:16', '2016-03-04 13:45:16', '0', 4, 7, 'personal accident insurance');
+INSERT INTO "cs421g04"."Reservations" ("licenseNumber", "pickUpDate", "returnDate", "isReturned", "uID", "vID", "typeOfCoverage") VALUES ('A1239-191093-03', '2016-02-27 13:45:16', '2016-02-29 13:45:16', '0', 5, 9, 'personal effects coverage');
+INSERT INTO "cs421g04"."Reservations" ("licenseNumber", "pickUpDate", "returnDate", "isReturned", "uID", "vID", "typeOfCoverage") VALUES ('L5784-140285-07', '2015-09-23 13:45:16', '2015-09-27 13:45:16', '1', 2, 12, 'personal accident insurance');
+INSERT INTO "cs421g04"."Reservations" ("licenseNumber", "pickUpDate", "returnDate", "isReturned", "uID", "vID", "typeOfCoverage") VALUES ('L4578-020576-03', '2015-09-29 13:45:16', '2015-10-03 13:45:16', '1', 3, 2, 'personal accident insurance');
+INSERT INTO "cs421g04"."Reservations" ("licenseNumber", "pickUpDate", "returnDate", "isReturned", "uID", "vID", "typeOfCoverage") VALUES ('L0034-210691-05', '2015-10-03 13:45:16', '2015-10-05 13:45:16', '1', 4, 7, 'personal effects coverage');
+INSERT INTO "cs421g04"."Reservations" ("licenseNumber", "pickUpDate", "returnDate", "isReturned", "uID", "vID", "typeOfCoverage") VALUES ('L2434-100791-02', '2015-10-07 13:45:16', '2015-10-12 13:45:16', '0', 5, 12, 'liability coverage');
+INSERT INTO "cs421g04"."Reservations" ("licenseNumber", "pickUpDate", "returnDate", "isReturned", "uID", "vID", "typeOfCoverage") VALUES ('M3521-201187-08', '2015-10-07 13:45:16', '2015-10-10 13:45:16', '1', 1, 5, 'loss-damage waiver');
+INSERT INTO "cs421g04"."Reservations" ("licenseNumber", "pickUpDate", "returnDate", "isReturned", "uID", "vID", "typeOfCoverage") VALUES ('T3465-190563-11', '2015-10-09 13:45:16', '2015-10-15 13:45:16', '1', 2, 3, 'personal effects coverage');
+INSERT INTO "cs421g04"."Reservations" ("licenseNumber", "pickUpDate", "returnDate", "isReturned", "uID", "vID", "typeOfCoverage") VALUES ('S3782-030784-10', '2015-10-10 13:45:16', '2015-10-15 13:45:16', '1', 3, 6, 'personal accident insurance');
 
 INSERT INTO "cs421g04"."Bill" ("amount", "date", "paymentMethod", "isPaid", "rID") VALUES (200, '2016-02-26 13:45:16', 'VISA', '1', 1);
 INSERT INTO "cs421g04"."Bill" ("amount", "date", "paymentMethod", "isPaid", "rID") VALUES (300, '2016-02-23 13:45:16', 'VISA', '1', 2);
