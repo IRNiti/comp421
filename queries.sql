@@ -23,3 +23,12 @@ SELECT
 FROM "Dropoff"
   INNER JOIN "Reservations" ON "Dropoff"."rID" = "Reservations"."rID"
 WHERE "Dropoff"."bID" = :bid;
+
+-- Get branch ID and vehicle ID (that have manual transmission) that has been reported to be in an accident)
+SELECT 
+  "bID", 
+  "Damage"."vID"
+FROM 
+  "cs421g04"."Damage" INNER JOIN "cs421g04"."Vehicles" ON ("cs421g04"."Damage"."vID" = "cs421g04"."Vehicles"."vID") 
+WHERE transmission = 'Manual';
+
