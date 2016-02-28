@@ -64,3 +64,8 @@ INSERT INTO cs421g04."Review" ("vID", "userName", text, date, rating) VALUES (6,
 INSERT INTO cs421g04."Review" ("vID", "userName", text, date, rating) VALUES (8, 'Kris C.', 'The design is great. The ride is comfortable. The steering is smooth and effortless. The engine is quiet and moderately powerful. The HVAC performs flawlessly.', '2016-02-26', 5);
 INSERT INTO cs421g04."Review" ("vID", "userName", text, date, rating) VALUES (10, 'Dan', 'Purchased this 2013 limited used in 2014 and have owned it about one year. Nicest car I''ve ever owned. It looks nice, drives well, is quiet and very comfortable. I haven''t had any problems with it.', '2015-07-27', 5);
 INSERT INTO cs421g04."Review" ("vID", "userName", text, date, rating) VALUES (19, 'Denny Y', 'Ford finally put quality into the ''15 Stang! This sexy eye catcher is a great summer ride. Rides and handles like a dream and is extremely comfortable. My only complaint is the poor grip on wet and almost dangerous on snowy roads even with their std All Weather Eagle GTs.', '2015-12-31', 5);
+
+INSERT INTO cs421g04."CreditCard" ("cardNumber", "expiryDate", "cardHolderName", "uID", "billID") VALUES ('5239012573033351', '2017-09-01', 'Bernie Kaminski', 1, 1);
+INSERT INTO cs421g04."CreditCard" ("cardNumber", "expiryDate", "cardHolderName", "uID", "billID") VALUES ('4532813348142725', '2019-03-01', 'Raluca Niti', 2, 2);
+INSERT INTO cs421g04."CreditCard" ("cardNumber", "expiryDate", "cardHolderName", "uID", "billID") VALUES ('5423695974215225', '2017-10-01', 'Teo Baranga', 3, 3);
+INSERT INTO cs421g04."CreditCard" ("cardNumber", "expiryDate", "cardHolderName", "uID", "billID") VALUES ('5109469779509195', '2020-08-01', 'Tony Nguyen', 4, 4);
