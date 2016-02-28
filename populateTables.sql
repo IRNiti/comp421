@@ -36,7 +36,7 @@ INSERT INTO "cs421g04"."Reservations" ("licenseNumber", "pickUpDate", "returnDat
 INSERT INTO "cs421g04"."Reservations" ("licenseNumber", "pickUpDate", "returnDate", "isReturned", "uID", "vID", "typeOfCoverage") VALUES ('A1239-123456-01', '2016-02-27 13:45:16', '2016-02-29 13:45:16', '0', 5, 9, 'personal effects coverage');
 
 INSERT INTO "cs421g04"."Bill" ("amount", "date", "paymentMethod", "isPaid", "rID") VALUES (200, '2016-02-26 13:45:16', 'VISA', '1', 1);
-INSERT INTO "cs421g04"."Bill" ("amount", "date", "paymentMethod", "isPaid", "rID") VALUES (200, '2016-02-23 13:45:16', 'VISA', '1', 2);
-INSERT INTO "cs421g04"."Bill" ("amount", "date", "paymentMethod", "isPaid", "rID") VALUES (200, '2016-02-26 13:45:16', 'MasterCard', '1', 3);
-INSERT INTO "cs421g04"."Bill" ("amount", "date", "paymentMethod", "isPaid", "rID") VALUES (200, '2016-02-26 13:45:16', 'Debit', '1', 4);
-INSERT INTO "cs421g04"."Bill" ("amount", "date", "paymentMethod", "isPaid", "rID") VALUES (200, '2016-02-26 13:45:16', 'Cash', '0', 5);
+INSERT INTO "cs421g04"."Bill" ("amount", "date", "paymentMethod", "isPaid", "rID") VALUES (300, '2016-02-23 13:45:16', 'VISA', '1', 2);
+INSERT INTO "cs421g04"."Bill" ("amount", "date", "paymentMethod", "isPaid", "rID") VALUES (400, '2016-02-26 13:45:16', 'MasterCard', '1', 3);
+INSERT INTO "cs421g04"."Bill" ("amount", "date", "paymentMethod", "isPaid", "rID") VALUES (450, '2016-02-26 13:45:16', 'Debit', '1', 4);
+INSERT INTO "cs421g04"."Bill" ("amount", "date", "paymentMethod", "isPaid", "rID") VALUES (500, '2016-02-26 13:45:16', 'Cash', '0', 5);
