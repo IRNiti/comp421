@@ -31,4 +31,8 @@ SELECT
 FROM 
   "cs421g04"."Damage" INNER JOIN "cs421g04"."Vehicles" ON ("cs421g04"."Damage"."vID" = "cs421g04"."Vehicles"."vID") 
 WHERE transmission = 'Manual';
-
+-- Get the amount of cars at every branch
+SELECT "Branches".address,COUNT("Vehicles"."bID") AS NumberOfVehicles FROM cs421g04."Vehicles"
+LEFT  JOIN cs421g04."Branches"
+ON "Branches"."bID"="Vehicles"."bID"
+GROUP BY address;
