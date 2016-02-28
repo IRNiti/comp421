@@ -40,3 +40,12 @@ INSERT INTO "cs421g04"."Bill" ("amount", "date", "paymentMethod", "isPaid", "rID
 INSERT INTO "cs421g04"."Bill" ("amount", "date", "paymentMethod", "isPaid", "rID") VALUES (400, '2016-02-26 13:45:16', 'MasterCard', '1', 3);
 INSERT INTO "cs421g04"."Bill" ("amount", "date", "paymentMethod", "isPaid", "rID") VALUES (450, '2016-02-26 13:45:16', 'Debit', '1', 4);
 INSERT INTO "cs421g04"."Bill" ("amount", "date", "paymentMethod", "isPaid", "rID") VALUES (500, '2016-02-26 13:45:16', 'Cash', '0', 5);
+
+INSERT INTO "cs421g04"."Damage" ("vID", "description", "date") VALUES (2, 'Accident occured when I did not check my blind spot so there is a dent in the right front door', '2016-01-16 13:45:16');
+INSERT INTO "cs421g04"."Damage" ("vID", "description", "date") VALUES (5, 'Rear ended at a stop sign', '2016-01-16 13:45:16');
+INSERT INTO "cs421g04"."Damage" ("vID", "description", "date") VALUES (8, 'Drunk driving and hit a tree', '2016-12-16 13:45:16');
+INSERT INTO "cs421g04"."Damage" ("vID", "description", "date") VALUES (11, 'Slippery road conditions caused the car to slide into a snow bank', '2016-11-16 13:45:16');
+INSERT INTO "cs421g04"."Damage" ("vID", "description", "date") VALUES (14, 'Driving too fast around a curve', '2016-09-16 13:45:16');
+INSERT INTO "cs421g04"."Damage" ("vID", "description", "date") VALUES (15, 'A car ran a red light and hit me in the intersection', '2016-01-06 13:45:16');
+INSERT INTO "cs421g04"."Damage" ("vID", "description", "date") VALUES (16, 'Backed up without looking and bumped a car', '2016-07-16 13:45:16');
+INSERT INTO "cs421g04"."Damage" ("vID", "description", "date") VALUES (1, 'Collided with a truck', '2014-08-16 13:45:16');
