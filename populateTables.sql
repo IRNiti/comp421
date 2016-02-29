@@ -82,3 +82,8 @@ INSERT INTO "cs421g04"."Dropoff" ("rID", "bID") VALUES (9, 1);
 INSERT INTO "cs421g04"."Dropoff" ("rID", "bID") VALUES (10, 5);
 INSERT INTO "cs421g04"."Dropoff" ("rID", "bID") VALUES (11, 3);
 INSERT INTO "cs421g04"."Dropoff" ("rID", "bID") VALUES (12, 2);
+
+INSERT INTO "cs421g04"."Extras" (name, description, "costPerDay") VALUES ('Child Safety & Booster Seats', 'Safety 1st Kinrod Booster Car Seat', 10);
+INSERT INTO "cs421g04"."Extras" (name, description, "costPerDay") VALUES ('GPS', 'Garmin Nvi 56lm Gps', 15);
+INSERT INTO "cs421g04"."Extras" (name, description, "costPerDay") VALUES ('Roadside Assistance', 'Fast, reliable assistance when stranded on the highway, ran out of fuel or locked keys in rental car', 25);
+INSERT INTO "cs421g04"."Extras" (name, description, "costPerDay") VALUES ('Fuel Plans', 'Option to have us refuel your rental car at specified locations', 20);
