@@ -87,3 +87,10 @@ INSERT INTO "cs421g04"."Extras" (name, description, "costPerDay") VALUES ('Child
 INSERT INTO "cs421g04"."Extras" (name, description, "costPerDay") VALUES ('GPS', 'Garmin Nvi 56lm Gps', 15);
 INSERT INTO "cs421g04"."Extras" (name, description, "costPerDay") VALUES ('Roadside Assistance', 'Fast, reliable assistance when stranded on the highway, ran out of fuel or locked keys in rental car', 25);
 INSERT INTO "cs421g04"."Extras" (name, description, "costPerDay") VALUES ('Fuel Plans', 'Option to have us refuel your rental car at specified locations', 20);
+
+INSERT INTO "cs421g04"."Upgrades" ("vID", "eID") VALUES (1, 3);
+INSERT INTO "cs421g04"."Upgrades" ("vID", "eID") VALUES (3, 1);
+INSERT INTO "cs421g04"."Upgrades" ("vID", "eID") VALUES (7, 2);
+INSERT INTO "cs421g04"."Upgrades" ("vID", "eID") VALUES (10, 4);
+INSERT INTO "cs421g04"."Upgrades" ("vID", "eID") VALUES (5, 1);
+INSERT INTO "cs421g04"."Upgrades" ("vID", "eID") VALUES (9, 1);
