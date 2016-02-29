@@ -69,3 +69,16 @@ INSERT INTO cs421g04."CreditCard" ("cardNumber", "expiryDate", "cardHolderName",
 INSERT INTO cs421g04."CreditCard" ("cardNumber", "expiryDate", "cardHolderName", "uID", "billID") VALUES ('4532813348142725', '2019-03-01', 'Raluca Niti', 2, 2);
 INSERT INTO cs421g04."CreditCard" ("cardNumber", "expiryDate", "cardHolderName", "uID", "billID") VALUES ('5423695974215225', '2017-10-01', 'Teo Baranga', 3, 3);
 INSERT INTO cs421g04."CreditCard" ("cardNumber", "expiryDate", "cardHolderName", "uID", "billID") VALUES ('5109469779509195', '2020-08-01', 'Tony Nguyen', 4, 4);
+
+INSERT INTO "cs421g04"."Dropoff" ("rID", "bID") VALUES (1, 2);
+INSERT INTO "cs421g04"."Dropoff" ("rID", "bID") VALUES (2, 2);
+INSERT INTO "cs421g04"."Dropoff" ("rID", "bID") VALUES (3, 3);
+INSERT INTO "cs421g04"."Dropoff" ("rID", "bID") VALUES (4, 4);
+INSERT INTO "cs421g04"."Dropoff" ("rID", "bID") VALUES (5, 1);
+INSERT INTO "cs421g04"."Dropoff" ("rID", "bID") VALUES (6, 3);
+INSERT INTO "cs421g04"."Dropoff" ("rID", "bID") VALUES (7, 5);
+INSERT INTO "cs421g04"."Dropoff" ("rID", "bID") VALUES (8, 4);
+INSERT INTO "cs421g04"."Dropoff" ("rID", "bID") VALUES (9, 1);
+INSERT INTO "cs421g04"."Dropoff" ("rID", "bID") VALUES (10, 5);
+INSERT INTO "cs421g04"."Dropoff" ("rID", "bID") VALUES (11, 3);
+INSERT INTO "cs421g04"."Dropoff" ("rID", "bID") VALUES (12, 2);
