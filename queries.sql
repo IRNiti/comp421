@@ -1,4 +1,6 @@
-﻿-- Get all premium users who have damaged their car but have an insurance policy
+﻿SET SEARCH_PATH TO "cs421g04";
+
+-- Get all premium users who have damaged their car but have an insurance policy
 SELECT
   "Users"."uID",
   "Users".name,

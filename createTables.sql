@@ -1,5 +1,7 @@
+SET SEARCH_PATH TO "cs421g04";
+
 CREATE SEQUENCE unique_userid;
-CREATE TABLE "cs421g04"."Users"
+CREATE TABLE "Users"
 (
   "uID"       INTEGER           NOT NULL DEFAULT nextval('unique_userid'),
   name        CHARACTER VARYING NOT NULL,
@@ -13,7 +15,7 @@ WITH (
 OIDS = FALSE
 );
 
-CREATE TABLE "cs421g04"."InsurancePolicy"
+CREATE TABLE "InsurancePolicy"
 (
   "typeOfCoverage" CHARACTER VARYING NOT NULL,
   price            DOUBLE PRECISION  NOT NULL,
@@ -25,7 +27,7 @@ OIDS = FALSE
 );
 
 CREATE SEQUENCE unique_eid;
-CREATE TABLE "cs421g04"."Extras"
+CREATE TABLE "Extras"
 (
   "eID"        INTEGER           NOT NULL DEFAULT nextval('unique_eid'),
   name         CHARACTER VARYING NOT NULL,
@@ -38,7 +40,7 @@ OIDS =FALSE
 );
 
 CREATE SEQUENCE unique_bid;
-CREATE TABLE "cs421g04"."Branches"
+CREATE TABLE "Branches"
 (
   "bID"   INTEGER           NOT NULL DEFAULT nextval('unique_bid'),
   address CHARACTER VARYING NOT NULL,
@@ -49,7 +51,7 @@ OIDS = FALSE
 );
 
 CREATE SEQUENCE unique_vid;
-CREATE TABLE "cs421g04"."Vehicles"
+CREATE TABLE "Vehicles"
 (
   "vID"          INTEGER           NOT NULL DEFAULT nextval('unique_vid'),
   make           CHARACTER VARYING NOT NULL,
@@ -60,14 +62,14 @@ CREATE TABLE "cs421g04"."Vehicles"
   transmission   CHARACTER VARYING NOT NULL,
   "bID"          INTEGER           NOT NULL,
   PRIMARY KEY ("vID"),
-  FOREIGN KEY ("bID") REFERENCES "cs421g04"."Branches" ("bID") ON UPDATE NO ACTION ON DELETE NO ACTION
+  FOREIGN KEY ("bID") REFERENCES "Branches" ("bID") ON UPDATE NO ACTION ON DELETE NO ACTION
 )
 WITH (
 OIDS = FALSE
 );
 
 CREATE SEQUENCE unique_rid;
-CREATE TABLE "cs421g04"."Reservations"
+CREATE TABLE "Reservations"
 (
   "rID"            INTEGER           NOT NULL DEFAULT nextval('unique_rid'),
   "licenseNumber"  CHARACTER VARYING NOT NULL,
@@ -78,16 +80,16 @@ CREATE TABLE "cs421g04"."Reservations"
   "vID"            INTEGER           NOT NULL,
   "typeOfCoverage" CHARACTER VARYING NOT NULL,
   PRIMARY KEY ("rID"),
-  FOREIGN KEY ("uID") REFERENCES "cs421g04"."Users" ("uID") ON UPDATE NO ACTION ON DELETE NO ACTION,
-  FOREIGN KEY ("vID") REFERENCES "cs421g04"."Vehicles" ("vID") ON UPDATE NO ACTION ON DELETE NO ACTION,
-  FOREIGN KEY ("typeOfCoverage") REFERENCES "cs421g04"."InsurancePolicy" ("typeOfCoverage") ON UPDATE NO ACTION ON DELETE NO ACTION
+  FOREIGN KEY ("uID") REFERENCES "Users" ("uID") ON UPDATE NO ACTION ON DELETE NO ACTION,
+  FOREIGN KEY ("vID") REFERENCES "Vehicles" ("vID") ON UPDATE NO ACTION ON DELETE NO ACTION,
+  FOREIGN KEY ("typeOfCoverage") REFERENCES "InsurancePolicy" ("typeOfCoverage") ON UPDATE NO ACTION ON DELETE NO ACTION
 )
 WITH (
 OIDS = FALSE
 );
 
 CREATE SEQUENCE unique_billid;
-CREATE TABLE "cs421g04"."Bill"
+CREATE TABLE "Bill"
 (
   "billID"        INTEGER           NOT NULL DEFAULT nextval('unique_billid'),
   "amount"        DOUBLE PRECISION  NOT NULL,
@@ -96,13 +98,13 @@ CREATE TABLE "cs421g04"."Bill"
   "isPaid"        BOOLEAN           NOT NULL DEFAULT FALSE,
   "rID"           INTEGER           NOT NULL,
   PRIMARY KEY ("billID"),
-  FOREIGN KEY ("rID") REFERENCES "cs421g04"."Reservations" ("rID") ON UPDATE NO ACTION ON DELETE NO ACTION
+  FOREIGN KEY ("rID") REFERENCES "Reservations" ("rID") ON UPDATE NO ACTION ON DELETE NO ACTION
 )
 WITH (
 OIDS = FALSE
 );
 
-CREATE TABLE "cs421g04"."CreditCard"
+CREATE TABLE "CreditCard"
 (
   "cardNumber"     CHAR(16)    NOT NULL,
   "expiryDate"     DATE        NOT NULL,
@@ -110,29 +112,29 @@ CREATE TABLE "cs421g04"."CreditCard"
   "uID"            INTEGER     NOT NULL,
   "billID"         INTEGER     NOT NULL,
   PRIMARY KEY ("cardNumber"),
-  FOREIGN KEY ("uID") REFERENCES "cs421g04"."Users" ("uID") ON UPDATE NO ACTION ON DELETE NO ACTION,
-  FOREIGN KEY ("billID") REFERENCES "cs421g04"."Bill" ("billID") ON UPDATE NO ACTION ON DELETE NO ACTION
+  FOREIGN KEY ("uID") REFERENCES "Users" ("uID") ON UPDATE NO ACTION ON DELETE NO ACTION,
+  FOREIGN KEY ("billID") REFERENCES "Bill" ("billID") ON UPDATE NO ACTION ON DELETE NO ACTION
 )
 WITH (
 OIDS = FALSE
 );
 
 CREATE SEQUENCE unique_damid;
-CREATE TABLE "cs421g04"."Damage"
+CREATE TABLE "Damage"
 (
   "dID"         INTEGER NOT NULL PRIMARY KEY DEFAULT nextval('unique_damid'),
   "vID"         INTEGER NOT NULL,
   "description" TEXT    NOT NULL,
   "date"        DATE    NOT NULL,
-  FOREIGN KEY ("vID") REFERENCES "cs421g04"."Vehicles" ("vID") ON UPDATE NO ACTION ON DELETE NO ACTION
+  FOREIGN KEY ("vID") REFERENCES "Vehicles" ("vID") ON UPDATE NO ACTION ON DELETE NO ACTION
 )
 WITH (
 OIDS = FALSE
 );
 
-CREATE TABLE "cs421g04"."Review"
+CREATE TABLE "Review"
 (
-  "vID"      INTEGER     NOT NULL REFERENCES "cs421g04"."Vehicles" ("vID") ON UPDATE NO ACTION ON DELETE NO ACTION,
+  "vID"      INTEGER     NOT NULL REFERENCES "Vehicles" ("vID") ON UPDATE NO ACTION ON DELETE NO ACTION,
   "userName" VARCHAR(30) NOT NULL,
   "text"     TEXT        NOT NULL,
   "date"     DATE        NOT NULL,
@@ -143,20 +145,20 @@ WITH (
 OIDS = FALSE
 );
 
-CREATE TABLE "cs421g04"."Upgrades"
+CREATE TABLE "Upgrades"
 (
-  "vID" INTEGER NOT NULL REFERENCES "cs421g04"."Vehicles" ("vID") ON UPDATE NO ACTION ON DELETE NO ACTION,
-  "eID" INTEGER NOT NULL REFERENCES "cs421g04"."Extras" ("eID") ON UPDATE NO ACTION ON DELETE NO ACTION,
+  "vID" INTEGER NOT NULL REFERENCES "Vehicles" ("vID") ON UPDATE NO ACTION ON DELETE NO ACTION,
+  "eID" INTEGER NOT NULL REFERENCES "Extras" ("eID") ON UPDATE NO ACTION ON DELETE NO ACTION,
   PRIMARY KEY ("vID", "eID")
 )
 WITH (
 OIDS = FALSE
 );
 
-CREATE TABLE "cs421g04"."Dropoff"
+CREATE TABLE "Dropoff"
 (
-  "rID" INTEGER NOT NULL REFERENCES "cs421g04"."Reservations" ("rID") ON UPDATE NO ACTION ON DELETE NO ACTION,
-  "bID" INTEGER NOT NULL REFERENCES "cs421g04"."Branches" ("bID") ON UPDATE NO ACTION ON DELETE NO ACTION,
+  "rID" INTEGER NOT NULL REFERENCES "Reservations" ("rID") ON UPDATE NO ACTION ON DELETE NO ACTION,
+  "bID" INTEGER NOT NULL REFERENCES "Branches" ("bID") ON UPDATE NO ACTION ON DELETE NO ACTION,
   PRIMARY KEY ("rID", "bID")
 )
 WITH (
