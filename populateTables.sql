@@ -1,5 +1,10 @@
 ﻿SET SEARCH_PATH TO "cs421g04";
 
+INSERT INTO "Users" (name, address, email, "isPremium", points) VALUES ('Bernie Kaminski', '2020 University', 'bernie@gmail.com', '1', 500);
+INSERT INTO "Users" (name, address, email, "isPremium", points) VALUES ('Raluca Niti', '730 Laval Avenue', 'raluca@gmail.com', '1', 500);
+INSERT INTO "Users" (name, address, email, "isPremium", points) VALUES ('Teo Baranga', '1001 Stanley', 'teo@gmail.com', '1', 500);
+INSERT INTO "Users" (name, address, email, "isPremium", points) VALUES ('Tony Nguyen', '2997 Edmond', 'tony@gmail.com', '1', 500);
+INSERT INTO "Users" (name, address, email, "isPremium", points) VALUES ('Anita Job', '421 Westmount Avenue', 'anita@mail.mcgill.ca', '0', 0);
 insert into "Users" (name, address, email, "isPremium", points) values ('Gregory Gutierrez', '19522 Pankratz Terrace', 'ggutierrez0@dailymotion.com', true, 917);
 insert into "Users" (name, address, email, "isPremium", points) values ('Harold Welch', '811 Calypso Place', 'hwelch1@scribd.com', false, 1469);
 insert into "Users" (name, address, email, "isPremium", points) values ('Dorothy Mccoy', '669 Londonderry Pass', 'dmccoy2@bravesites.com', true, 484);

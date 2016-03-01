@@ -1,4 +1,4 @@
-SET SEARCH_PATH TO "cs421g04";
+﻿SET SEARCH_PATH TO "cs421g04";
 
 CREATE SEQUENCE unique_userid;
 CREATE TABLE "Users"
@@ -122,11 +122,11 @@ OIDS = FALSE
 CREATE SEQUENCE unique_damid;
 CREATE TABLE "Damage"
 (
-  "dID"         INTEGER NOT NULL PRIMARY KEY DEFAULT nextval('unique_damid'),
-  "vID"         INTEGER NOT NULL,
+  "dID"         INTEGER NOT NULL  DEFAULT nextval('unique_damid'),
+  "vID"         INTEGER NOT NULL REFERENCES "Vehicles" ("vID") ON UPDATE NO ACTION ON DELETE NO ACTION,
   "description" TEXT    NOT NULL,
   "date"        DATE    NOT NULL,
-  FOREIGN KEY ("vID") REFERENCES "Vehicles" ("vID") ON UPDATE NO ACTION ON DELETE NO ACTION
+  PRIMARY KEY ("vID", "dID")
 )
 WITH (
 OIDS = FALSE
