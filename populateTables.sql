@@ -138,6 +138,7 @@ INSERT INTO "CreditCard" ("cardNumber", "expiryDate", "cardHolderName", "uID", "
 INSERT INTO "CreditCard" ("cardNumber", "expiryDate", "cardHolderName", "uID", "billID") VALUES ('4532813348142725', '2019-03-01', 'Raluca Niti', 2, 2);
 INSERT INTO "CreditCard" ("cardNumber", "expiryDate", "cardHolderName", "uID", "billID") VALUES ('5423695974215225', '2017-10-01', 'Teo Baranga', 3, 3);
 INSERT INTO "CreditCard" ("cardNumber", "expiryDate", "cardHolderName", "uID", "billID") VALUES ('5109469779509195', '2020-08-01', 'Tony Nguyen', 4, 4);
+INSERT INTO "CreditCard" ("cardNumber", "expiryDate", "cardHolderName", "uID", "billID") VALUES ('5109469779504295', '2019-11-01', 'Anita Job', 5, 5);
 
 INSERT INTO "Dropoff" ("rID", "bID") VALUES (1, 2);
 INSERT INTO "Dropoff" ("rID", "bID") VALUES (2, 2);
@@ -156,6 +157,7 @@ INSERT INTO "Extras" (name, description, "costPerDay") VALUES ('Child Safety & B
 INSERT INTO "Extras" (name, description, "costPerDay") VALUES ('GPS', 'Garmin Nvi 56lm Gps', 15);
 INSERT INTO "Extras" (name, description, "costPerDay") VALUES ('Roadside Assistance', 'Fast, reliable assistance when stranded on the highway, ran out of fuel or locked keys in rental car', 25);
 INSERT INTO "Extras" (name, description, "costPerDay") VALUES ('Fuel Plans', 'Option to have us refuel your rental car at specified locations', 20);
+INSERT INTO "Extras" (name, description, "costPerDay") VALUES ('Seat warmers', 'Tirol 12V Winter Warm Car Heated Seat Cushion', 5);
 
 INSERT INTO "Upgrades" ("vID", "eID") VALUES (1, 3);
 INSERT INTO "Upgrades" ("vID", "eID") VALUES (3, 1);
