@@ -139,18 +139,18 @@ INSERT INTO "CreditCard" ("cardNumber", "expiryDate", "cardHolderName", "uID", "
 INSERT INTO "CreditCard" ("cardNumber", "expiryDate", "cardHolderName", "uID", "billID") VALUES ('5423695974215225', '2017-10-01', 'Teo Baranga', 3, 3);
 INSERT INTO "CreditCard" ("cardNumber", "expiryDate", "cardHolderName", "uID", "billID") VALUES ('5109469779509195', '2020-08-01', 'Tony Nguyen', 4, 4);
 
-INSERT INTO "Dropoff" ("bID") VALUES (1, 2);
-INSERT INTO "Dropoff" ("bID") VALUES (2, 2);
-INSERT INTO "Dropoff" ("bID") VALUES (3, 3);
-INSERT INTO "Dropoff" ("bID") VALUES (4, 4);
-INSERT INTO "Dropoff" ("bID") VALUES (5, 1);
-INSERT INTO "Dropoff" ("bID") VALUES (6, 3);
-INSERT INTO "Dropoff" ("bID") VALUES (7, 5);
-INSERT INTO "Dropoff" ("bID") VALUES (8, 4);
-INSERT INTO "Dropoff" ("bID") VALUES (9, 1);
-INSERT INTO "Dropoff" ("bID") VALUES (10, 5);
-INSERT INTO "Dropoff" ("bID") VALUES (11, 3);
-INSERT INTO "Dropoff" ("bID") VALUES (12, 2);
+INSERT INTO "Dropoff" ("rID", "bID") VALUES (1, 2);
+INSERT INTO "Dropoff" ("rID", "bID") VALUES (2, 2);
+INSERT INTO "Dropoff" ("rID", "bID") VALUES (3, 3);
+INSERT INTO "Dropoff" ("rID", "bID") VALUES (4, 4);
+INSERT INTO "Dropoff" ("rID", "bID") VALUES (5, 1);
+INSERT INTO "Dropoff" ("rID", "bID") VALUES (6, 3);
+INSERT INTO "Dropoff" ("rID", "bID") VALUES (7, 5);
+INSERT INTO "Dropoff" ("rID", "bID") VALUES (8, 4);
+INSERT INTO "Dropoff" ("rID", "bID") VALUES (9, 1);
+INSERT INTO "Dropoff" ("rID", "bID") VALUES (10, 5);
+INSERT INTO "Dropoff" ("rID", "bID") VALUES (11, 3);
+INSERT INTO "Dropoff" ("rID", "bID") VALUES (12, 2);
 
 INSERT INTO "Extras" (name, description, "costPerDay") VALUES ('Child Safety & Booster Seats', 'Safety 1st Kinrod Booster Car Seat', 10);
 INSERT INTO "Extras" (name, description, "costPerDay") VALUES ('GPS', 'Garmin Nvi 56lm Gps', 15);
