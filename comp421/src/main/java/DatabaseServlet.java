@@ -97,7 +97,7 @@ public class DatabaseServlet extends HttpServlet {
 		// need to make 
 		String tableName = "\"cs421g04\"" + "." + "\"Users\"";
 		String getUID = String.format("SELECT * from %s WHERE email='%s'", tableName, email);
-		String getNextUserId = String.format("select nextval('unique_userid')");
+		String getNextUserId = "SELECT nextval('unique_userid')";
 		int emailCount = 0;
 		int userCount = 0;
 		try {
