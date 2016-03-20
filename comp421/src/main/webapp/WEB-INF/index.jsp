@@ -80,7 +80,7 @@
     <form id="loginForm">
     <fieldset class="form-group">
       <label for="exampleInputEmail1">Login with email address</label>
-      <input name="address" type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+      <input name="emailAddress" type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
     </fieldset>
   </form>
   
@@ -90,10 +90,10 @@
 
 <div class="row" id="login">
   <div class="col-xs-8 col-md-8">
-    <form id="loginForm">
+    <form id="loginFormBasic">
     <fieldset class="form-group">
       <label for="exampleInputEmail1">Login with email address</label>
-      <input name="address" type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+      <input name="emailAddress" type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
     </fieldset>
   </form>
   <button id="loginButton" class="btn btn-primary">Login</button>
@@ -159,10 +159,10 @@
         debugger;
         $.ajax({
             cache: false,
-            url: 'http://localhost:8080/comp421/create',
+            url: 'http://localhost:8080/comp421/login',
             type: 'post',
             dataType:'text',
-            data: $('#loginForm').serialize(),
+            data: $('#loginFormBasic').serialize(),
             success: function()
             {
               alert('success');

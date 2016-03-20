@@ -95,14 +95,13 @@ public class DatabaseServlet extends HttpServlet {
 	private User createUser(String name, String address, String email, boolean isPremium, int points) {
 		// need to make 
 		String tableName = "\"cs421g04\"" + "." + "\"Users\"";
-		String getUID = String.format("SELECT * from %s WHERE email='%s'", tableName, email);
-		System.out.println(getUID);
+		String getUsers = String.format("SELECT * from %s WHERE email='%s'", tableName, email);
 		String getNextUserId = "SELECT nextval('unique_userid')";
 		int emailCount = 0;
 		int userCount = 0;
 		try {
 			Statement statement = this.connection.createStatement();
-			ResultSet rs = statement.executeQuery(getUID);
+			ResultSet rs = statement.executeQuery(getUsers);
 			// Checking if email already exists, if it does return null
 			// using the same email is not allowed
 			while (rs.next()) {
