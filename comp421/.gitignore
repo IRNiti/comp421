@@ -1,0 +1,5 @@
+# Ignore Intellij
+.idea/
+
+### Intellij Patch ###
+*.iml
