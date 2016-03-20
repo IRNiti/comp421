@@ -34,6 +34,13 @@
 			<artifactId>log4j-core</artifactId>
 			<version>2.5</version>
 		</dependency>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.2.4</version>
+		</dependency>
+
+
 	</dependencies>
 	<build>
 		<finalName>comp421</finalName>
