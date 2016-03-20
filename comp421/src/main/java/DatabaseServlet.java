@@ -56,13 +56,12 @@ public class DatabaseServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		// Creating a user account: uid, name, address, email, isPremium, points
-		HttpSession session = request.getSession(true);
 		String name = request.getParameter("name");
 		String address = request.getParameter("address");
-		String email = request.getParameter("email");
+		String email = request.getParameter("emailAddress");
 		String isPremium = request.getParameter("isPremium"); // on client side, the value should be either TRUE or FALSE, not 0 or 1
 		boolean premium;
-		if (isPremium.toLowerCase().equals("true")) {
+		if (isPremium != null) {
 			premium = true;
 		} else {
 			premium = false;
@@ -97,12 +96,15 @@ public class DatabaseServlet extends HttpServlet {
 		// need to make 
 		String tableName = "\"cs421g04\"" + "." + "\"Users\"";
 		String getUID = String.format("SELECT * from %s WHERE email='%s'", tableName, email);
+		System.out.println(getUID);
 		String getNextUserId = "SELECT nextval('unique_userid')";
 		int emailCount = 0;
 		int userCount = 0;
 		try {
 			Statement statement = this.connection.createStatement();
 			ResultSet rs = statement.executeQuery(getUID);
+			// Checking if email already exists, if it does return null
+			// using the same email is not allowed
 			while (rs.next()) {
 				emailCount++;
 			}
@@ -111,14 +113,13 @@ public class DatabaseServlet extends HttpServlet {
 			}
 			statement = this.connection.createStatement();
 			rs = statement.executeQuery(getNextUserId);
+			// checking the unique id that will be assigned to this new user
 			while (rs.next()) {
 				userCount = rs.getInt("nextval");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		// using the same email is not allowed
-
 		User user = new User(userCount, name, address, email, isPremium, points);
 		return user;
 	}

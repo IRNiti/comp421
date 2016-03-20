@@ -107,7 +107,7 @@
   <form id="form">
     <fieldset class="form-group">
       <label for="exampleInputEmail1">Email address</label>
-      <input name="address" type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+      <input name="emailAddress" type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
       <small class="text-muted">We'll never share your email with anyone else.</small>
     </fieldset>
     <fieldset class="form-group">
