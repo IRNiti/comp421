@@ -89,7 +89,7 @@
   </fieldset>
   <div class="form-group">
   <label for="comment">Review Text</label>
-  <textarea name="text"class="form-control" rows="5" id="comment"></textarea>
+  <textarea name="review"class="form-control" rows="5" id="comment"></textarea>
 	</div>
   </form>
   <button id="submitReviewButton" class="btn btn-primary">Submit</button>
@@ -329,7 +329,7 @@
 	            complete: function(data){
 	            	debugger;
 	            	cars = JSON.parse(data.responseText);
-	            	$('#exampleSelect2').html("");
+	            	$('#exampleSelectReview').html("");
 	            	for (var i = 0; cars.length; i++) {
 	            	    $('#exampleSelectReview').append(" <option>"+cars[i].make+":"+ cars[i].model+":"+cars[i].costPerDay+":"+cars[i].vId+"</option>");
 	            	}
@@ -349,11 +349,11 @@
         debugger;
         var resData = $('#reviewForm').serialize();
         var selected = $('#exampleSelectReview option:selected').val().split(":")[3];
-        resData = resData + "&vId=" + selected +"&uId="+user.uId;
+        resData = resData + "&vehicleID=" + selected +"&userName="+user.name;
         $.ajax({
             cache: false,
             url: 'http://localhost:8080/comp421/reserve',
-            type: 'post',
+            type: 'get',
             dataType:'text',
             data: resData,
             success: function()
