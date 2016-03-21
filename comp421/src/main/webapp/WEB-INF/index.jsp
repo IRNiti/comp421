@@ -24,6 +24,21 @@
   <div class="col-xs-8 col-md-8">
     <h2>Return a car</h2>
     <form id="returnForm">
+    <fieldset class="form-group">
+    <label for="returnBranch">Branches</label>
+    <select name="branch"class="form-control" id="returnBranch">
+      <option id="1">475 President Kennedy</option>
+      <option id="2">5960 Boulevard Decarie</option>
+      <option id="3">1717 Rue Berri</option>
+      <option id="4">3480 Boulevard Des Sources</option>
+      <option id="5">1555 Cure Labelle</option>
+    </select>
+    <fieldset class="form-group">
+      <label for="reservationNumber">Reservation Number</label>
+      <input name="rId"type="text" class="form-control" id="reservationNumber" placeholder="Enter Reservation Number">
+      <small class="text-muted"></small>
+    </fieldset>
+  </fieldset>
   </form>
   <button id="makeReturnButton" class="btn btn-primary">Return</button>
   <button id="ReturnBackButton" class="btn btn-primary">Back</button>
@@ -300,9 +315,20 @@
               
             },
             complete: function(data){
-            	alert("Reservation made ");
-            $('#mainPage').show();
-   		      $('#Reserve').hide();
+            	var res = JSON.parse(data.responseText);
+            	if(res.result == -1)
+            	{
+            		alert("Reservation not made, car not available on those dates ");
+            	}
+            	else
+            	{
+            		alert("Reservation Made!");
+            		$('#mainPage').show();
+         		    $('#Reserve').hide();
+            		
+            	}
+            	
+            
             }
         });
 
@@ -337,7 +363,7 @@
 	            url: 'http://localhost:8080/comp421/vehicles',
 	            type: 'get',
 	            dataType:'text',
-	            data: '&branchAddress=475 President Kennedy'+'&all=True',
+	            data: 'all=True',
 	            success: function()
 	            {
 	              
@@ -396,6 +422,29 @@
 	      $('#return').hide();
 	    }
 	);
+    $('#makeReturnButton').click(function() {
+    	
+    	 $.ajax({
+             cache: false,
+             url: 'http://localhost:8080/comp421/return',
+             type: 'get',
+             dataType:'text',
+             data: $('#returnForm').serialize(),
+             success: function()
+             {
+               
+             },
+             complete: function(data){
+             	alert("vehicle returned");
+             	 $('#mainPage').show();
+       	      $('#return').hide();
+             }
+         });
+    	
+	     
+	    }
+	);
+    
     
     
    
