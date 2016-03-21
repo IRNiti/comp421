@@ -30,10 +30,8 @@ public class VehicleServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
         try {
         	DriverManager.registerDriver (new org.postgresql.Driver());
-//            String url = "jdbc:postgresql://comp421.cs.mcgill.ca:5432/cs421";
-//            connection = DriverManager.getConnection (url, null, null); // change both null values to username and password to connect to the db
-			String url = "jdbc:postgresql://10.0.1.8:5432/CarRental";
-			connection = DriverManager.getConnection(url, "pi", "nguyen");
+            String url = "jdbc:postgresql://comp421.cs.mcgill.ca:5432/cs421";
+            connection = DriverManager.getConnection (url, null, null); // change both null values to username and password to connect to the db
         } catch (Exception e){
         	e.printStackTrace();
         }

@@ -32,10 +32,8 @@ public class ReturnServlet extends HttpServlet {
 		try {
 			DriverManager.registerDriver (new org.postgresql.Driver());
 			String url = "jdbc:postgresql://comp421.cs.mcgill.ca:5432/cs421";
-			connection = DriverManager.getConnection (url, "cs421g04", "CarRental#1"); // change both null values to username and password to connect to the db
-			//			String url = "jdbc:postgresql://10.0.1.8:5432/CarRental";
-			//			connection = DriverManager.getConnection(url, "pi", "nguyen");
-			statement = connection.createStatement ( ) ;
+			connection = DriverManager.getConnection(url, "cs421g04", "CarRental#1"); // change both null values to username and password to connect to the db
+			statement = connection.createStatement() ;
 
 		} catch (Exception e){
 			e.printStackTrace();
@@ -55,17 +53,15 @@ public class ReturnServlet extends HttpServlet {
 		String message = "";
 		String jsonResponse = "";
 
-
 		// check if entered branch is same as the one associated to rID in Dropoff table				
 		try{
 			String querySQL = "SELECT \"bID\" FROM \"cs421g04\".\"Dropoff\" WHERE \"rID\" ="+rID;
 			java.sql.ResultSet rs = statement.executeQuery ( querySQL ) ;
 
-			while ( rs.next ( ) ) {
-				queryBranch = rs.getInt ( 1 ) ;
+			while (rs.next()) {
+				queryBranch = rs.getInt (1) ;
 			}
-
-			if(queryBranch != bId){
+			if (queryBranch != bId) {
 				message = "mismatch from dropoff branch. Check original reservation";
 				jsonResponse = new Gson().toJson(message);
 				response.setContentType("application/json");
@@ -74,9 +70,7 @@ public class ReturnServlet extends HttpServlet {
 				return;
 			}
 
-		} catch(SQLException e)
-		{
-
+		} catch(SQLException e) {
 			message = e.getMessage();
 			jsonResponse = new Gson().toJson(message);
 			response.setContentType("application/json");
@@ -86,9 +80,8 @@ public class ReturnServlet extends HttpServlet {
 
 		}
 
-
 		//update vehicle branch to new branch
-		if(queryBranch == bId){
+		if (queryBranch == bId) {
 			try {
 				String insertSQL = "UPDATE \"cs421g04\".\"Vehicles\" SET \"bID\" = "+bId+" WHERE \"rID\" = "+rID;
 
@@ -96,8 +89,7 @@ public class ReturnServlet extends HttpServlet {
 				statement.executeUpdate ( insertSQL ) ;
 				message = "updated vehicle branch to "+bId;
 
-			} catch (SQLException e)
-			{
+			} catch (SQLException e) {
 				message = e.getMessage();
 				jsonResponse = new Gson().toJson(message);
 				response.setContentType("application/json");
@@ -109,11 +101,9 @@ public class ReturnServlet extends HttpServlet {
 			// set the vehicle as being returned
 			try {
 				String updateSQL = "UPDATE \"cs421g04\".\"Reservations\" SET \"isReturned\" = true WHERE \"rID\" = "+rID;
-
 				statement.executeUpdate ( updateSQL ) ;  
 
-			} catch (SQLException e)
-			{
+			} catch (SQLException e) {
 				message = e.getMessage();
 				jsonResponse = new Gson().toJson(message);
 				response.setContentType("application/json");
@@ -123,15 +113,11 @@ public class ReturnServlet extends HttpServlet {
 			}
 
 		}
-
-
-
 		// return json response to front-end
 		jsonResponse = new Gson().toJson(message);
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		response.getWriter().write(jsonResponse);
-
 	}
 
 	/**
