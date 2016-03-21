@@ -69,7 +69,7 @@ public class DatabaseServlet extends HttpServlet {
 		int points = 0;
 		String tableName = "\"cs421g04\"" + "." + "\"Users\"";
 		String insertStatement = String.format("INSERT INTO %s (name, address, email, \"isPremium\", points) VALUES ('%s', '%s', '%s', '%s', %d)", 
-				tableName, name, address, email, isPremium, points);		
+				tableName, name, address, email, premium, points);		
 		try {
 			User newUser = this.createUser(name, address, email, premium, points);
 			if (newUser != null) {
@@ -119,7 +119,7 @@ public class DatabaseServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		User user = new User(userCount, name, address, email, isPremium, points);
+		User user = new User(userCount+1, name, address, email, isPremium, points);
 		return user;
 	}
 

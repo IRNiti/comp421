@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
@@ -44,19 +45,12 @@ public class VehicleServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String branchAddress = request.getParameter("branchAddress");
+		String showAllVehicles = request.getParameter("all");
 		String tableName = "\"cs421g04\"" + "." + "\"Vehicles\"";
 		int branchId = this.getBranchId(branchAddress);
 		ArrayList<Vehicle> vehicles = new ArrayList<Vehicle>();
-		// error case so just return an empty list
-		if (branchId == -1) {
-			ArrayList<Vehicle> emptyVehicles = new ArrayList<Vehicle>();
-			String jsonResponse = new Gson().toJson(emptyVehicles);
-			response.setContentType("application/json");
-			response.setCharacterEncoding("UTF-8");
-			response.getWriter().write(jsonResponse);
-		} else {
-			// ideal case, given a branch address, find branch id then all vehicles belonging to that branch id
-			String getVehicles = String.format("SELECT * FROM %s WHERE \"bID\"='%d'", tableName, branchId);
+		if (showAllVehicles != null) { // return all cars
+			String getVehicles = String.format("SELECT * FROM %s", tableName, branchId);
 			try {
 				Statement statement = this.connection.createStatement();
 				ResultSet rs = statement.executeQuery(getVehicles);
@@ -72,6 +66,33 @@ public class VehicleServlet extends HttpServlet {
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
 			response.getWriter().write(jsonResponse);
+		} else {
+			// error case so just return an empty list
+			if (branchId == -1) {
+				ArrayList<Vehicle> emptyVehicles = new ArrayList<Vehicle>();
+				String jsonResponse = new Gson().toJson(emptyVehicles);
+				response.setContentType("application/json");
+				response.setCharacterEncoding("UTF-8");
+				response.getWriter().write(jsonResponse);
+			} else {
+				// ideal case, given a branch address, find branch id then all vehicles belonging to that branch id
+				String getVehicles = String.format("SELECT * FROM %s WHERE \"bID\"='%d'", tableName, branchId);
+				try {
+					Statement statement = this.connection.createStatement();
+					ResultSet rs = statement.executeQuery(getVehicles);
+					while (rs.next()) {
+						vehicles.add(new Vehicle(rs.getInt("vID"), rs.getInt("bID"), rs.getString("make"), rs.getString("model"), rs.getInt("passCapacity"),
+								rs.getInt("costPerDay"), rs.getString("type"), rs.getString("transmission")));
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				// return json response to front-end
+				String jsonResponse = new Gson().toJson(vehicles);
+				response.setContentType("application/json");
+				response.setCharacterEncoding("UTF-8");
+				response.getWriter().write(jsonResponse);
+			}
 		}
 		
 	}

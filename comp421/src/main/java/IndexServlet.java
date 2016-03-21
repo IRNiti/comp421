@@ -26,8 +26,8 @@ public class IndexServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		 String name = "Database";
-		 request.setAttribute("name", name); 
+//		 String name = "Database";
+//		 request.setAttribute("name", name); 
 		 request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response); // returns rendered jsp page
 	}
 

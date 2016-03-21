@@ -73,8 +73,6 @@ public class ReservationServlet extends HttpServlet {
 				response.setContentType("application/json");
 				response.setCharacterEncoding("UTF-8");
 				response.getWriter().write(jsonResponse);
-				this.connection.close();
-				return;
 				// return error status
 			} 
 		} catch (Exception e) {
@@ -92,16 +90,11 @@ public class ReservationServlet extends HttpServlet {
 				response.setContentType("application/json");
 				response.setCharacterEncoding("UTF-8");
 				response.getWriter().write(jsonResponse);
-				statement.close();
-				this.connection.close();
-				return;
 			} else {
 				String jsonResponse = new Gson().toJson(Collections.singletonMap("return", -1));
 				response.setContentType("application/json");
 				response.setCharacterEncoding("UTF-8");
 				response.getWriter().write(jsonResponse);
-				this.connection.close();
-				return;
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
