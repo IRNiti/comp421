@@ -41,4 +41,13 @@
     <servlet-name>VehicleServlet</servlet-name>
     <url-pattern>/vehicles</url-pattern>
   </servlet-mapping>
+  <servlet>
+		<description>ReviewServlet</description>
+		<display-name>ReviewServlet</display-name>
+		<servlet-name>ReviewServlet</servlet-name>
+		<servlet-class>main.java.ReviewServlet</servlet-class></servlet>
+	<servlet-mapping>
+		<servlet-name>ReviewServlet</servlet-name>
+		<url-pattern>/review</url-pattern>
+	</servlet-mapping>
 </web-app>
