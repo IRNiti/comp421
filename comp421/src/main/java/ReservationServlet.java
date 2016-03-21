@@ -34,8 +34,8 @@ public class ReservationServlet extends HttpServlet {
         	DriverManager.registerDriver (new org.postgresql.Driver());
 //            String url = "jdbc:postgresql://comp421.cs.mcgill.ca:5432/cs421";
 //            connection = DriverManager.getConnection (url, "cs421g04", "CarRental#1"); // change both null values to username and password to connect to the db
-			//String url = "jdbc:postgresql://10.0.1.8:5432/CarRental";
-			//connection = DriverManager.getConnection(url, "pi", "nguyen");
+			String url = "jdbc:postgresql://10.0.1.8:5432/CarRental";
+			connection = DriverManager.getConnection(url, "pi", "nguyen");
      
         } catch (Exception e){
         	e.printStackTrace();
@@ -61,47 +61,36 @@ public class ReservationServlet extends HttpServlet {
 		
 		String returnBranch = request.getParameter("dropoffBranchAddress");
 		String licenseNumber = request.getParameter("licenseNumber");
-		boolean isReturned = false;//request.getParameter("isReturned");
+		boolean isReturned = false;
 		int userId = Integer.parseInt(request.getParameter("uId"));
 		int vehicleId = Integer.parseInt(request.getParameter("vId"));
 		String insurance = request.getParameter("insurance");
-		int queryBranch;
-		Statement bidStatement = this.connection.createStatement();
+		int queryBranch = -1;
 		String message = "";
 		String jsonResponse = "";
-		try{
+		
+		try {
+			Statement bidStatement = this.connection.createStatement();
 			String querySQL = "SELECT \"bID\" FROM \"cs421g04\".\"Branches\" WHERE \"address\" ="+"'"+returnBranch+"'";
 			java.sql.ResultSet rs = bidStatement.executeQuery ( querySQL ) ;
-			
 			while ( rs.next ( ) ) {
 				queryBranch = rs.getInt ( 1 ) ;
 			}
-
-			
-		} catch(SQLException e)
-		{
-
+		} catch(SQLException e) {
 			message = e.getMessage();
 			jsonResponse = new Gson().toJson(message);
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
 			response.getWriter().write(jsonResponse);
 			return;
-
 		}
-		
-		
-		
-		
-		
-		
 		
 		try {
 			pickUpDateFormatted = formatter.parse(pickUpDate);
 			returnDateFormatted = formatter.parse(returnDate);
 			// error checking to see if pick up date is after return date
 			if (pickUpDateFormatted.compareTo(returnDateFormatted) > 0) {
-				String jsonResponse = new Gson().toJson(Collections.singletonMap("return", -1));
+				jsonResponse = new Gson().toJson(Collections.singletonMap("return", -1));
 				response.setContentType("application/json");
 				response.setCharacterEncoding("UTF-8");
 				response.getWriter().write(jsonResponse);
@@ -111,19 +100,46 @@ public class ReservationServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		String tableName = "\"cs421g04\"" + "." + "\"Reservations\"";
-		String insertStatement = String.format("INSERT INTO %s (\"licenseNumber\", \"pickUpDate\", \"returnDate\", \"isReturned\", \"uID\", \"vID\", \"typeOfCoverage\") VALUES ('%s', '%s', '%s', '%s', %d, %d, '%s')"
+		String insertStatement = String.format("INSERT INTO %s (\"licenseNumber\", \"pickUpDate\", \"returnDate\", \"isReturned\", \"uID\", \"vID\", \"typeOfCoverage\") VALUES ('%s', '%s', '%s', '%s', %d, %d, '%s') RETURNING \"rID\""
 				,tableName, licenseNumber, pickUpDateFormatted, returnDateFormatted, isReturned, userId, vehicleId, insurance);		
 		Statement statement;
 		try {
 			if (this.canReserve(pickUpDateFormatted, vehicleId)) {
+				int reservationId = 0;
 				statement = this.connection.createStatement();
-				statement.executeUpdate(insertStatement);
-				String jsonResponse = new Gson().toJson(Collections.singletonMap("return", 0));
-				response.setContentType("application/json");
-				response.setCharacterEncoding("UTF-8");
-				response.getWriter().write(jsonResponse);
+				ResultSet rs = statement.executeQuery(insertStatement);
+				while (rs.next()) {
+					reservationId = rs.getInt("rID");
+				}
+				// successfully reservation here so add to drop off table
+				if (reservationId >= 0) {
+					String dropOffTable = "\"cs421g04\"" + "." + "\"Dropoff\"";
+					String insertIntoDropOff = String.format("INSERT INTO %s (\"rID\", \"bID\") VALUES (%d, %d)", dropOffTable, reservationId, queryBranch);
+					statement = this.connection.createStatement();
+					int status = statement.executeUpdate(insertIntoDropOff);
+					if (status == 1) {
+						// successfully added to the drop off table
+						jsonResponse = new Gson().toJson(Collections.singletonMap("return", 0));
+						response.setContentType("application/json");
+						response.setCharacterEncoding("UTF-8");
+						response.getWriter().write(jsonResponse);
+					} else {
+						// failed to add to the drop off table
+						jsonResponse = new Gson().toJson(Collections.singletonMap("return", -1));
+						response.setContentType("application/json");
+						response.setCharacterEncoding("UTF-8");
+						response.getWriter().write(jsonResponse);
+					}
+				} else {
+					// reseration failed for some other reason
+					jsonResponse = new Gson().toJson(Collections.singletonMap("return", -1));
+					response.setContentType("application/json");
+					response.setCharacterEncoding("UTF-8");
+					response.getWriter().write(jsonResponse);
+				}
 			} else {
-				String jsonResponse = new Gson().toJson(Collections.singletonMap("return", -1));
+				// resercation failed because car is already reserverd for when you want to reserve it
+				jsonResponse = new Gson().toJson(Collections.singletonMap("return", -1));
 				response.setContentType("application/json");
 				response.setCharacterEncoding("UTF-8");
 				response.getWriter().write(jsonResponse);
@@ -132,9 +148,6 @@ public class ReservationServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		String insertDropOff = "INSERT INTO";
-
 	}
 	
 	private boolean canReserve(Date pickUpDate, int vehicleId) {
