@@ -335,7 +335,7 @@
 	            url: 'http://localhost:8080/comp421/vehicles',
 	            type: 'get',
 	            dataType:'text',
-	            data: '&all=True',
+	            data: '&branchAddress=475 President Kennedy'+'&all=True',
 	            success: function()
 	            {
 	              
@@ -366,7 +366,7 @@
         resData = resData + "&vehicleID=" + selected +"&userName="+user.name;
         $.ajax({
             cache: false,
-            url: 'http://localhost:8080/comp421/reserve',
+            url: 'http://localhost:8080/comp421/review',
             type: 'get',
             dataType:'text',
             data: resData,
