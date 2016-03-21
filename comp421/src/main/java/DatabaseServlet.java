@@ -26,7 +26,7 @@ public class DatabaseServlet extends HttpServlet {
      */
     public DatabaseServlet() {
         super();
-        // TODO Auto-generated constructor stub
+        
         try {
         	DriverManager.registerDriver (new org.postgresql.Driver());
             String url = "jdbc:postgresql://comp421.cs.mcgill.ca:5432/cs421";
@@ -41,7 +41,7 @@ public class DatabaseServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response); // returns rendered jsp page
 	}
 
@@ -50,7 +50,7 @@ public class DatabaseServlet extends HttpServlet {
 	 * This method will be used to create an account
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		// Creating a user account: uid, name, address, email, isPremium, points
 		String name = request.getParameter("name");
 		String address = request.getParameter("address");

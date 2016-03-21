@@ -12,10 +12,12 @@ import java.util.ArrayList;
 import java.util.Date;
 
 
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 
 
 import com.google.gson.Gson;
@@ -33,12 +35,11 @@ public class ReviewServlet extends HttpServlet {
 	 */
 	public ReviewServlet() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 		try {
 			DriverManager.registerDriver (new org.postgresql.Driver());
-
-			//			String url = "jdbc:postgresql://10.0.1.8:5432/CarRental";
-			//			connection = DriverManager.getConnection(url, "pi", "nguyen");
+			String url = "jdbc:postgresql://comp421.cs.mcgill.ca:5432/cs421";
+			connection = DriverManager.getConnection(url, null, null); // change both null values to username and password to connect to the db
 			statement = connection.createStatement ( ) ;
 
 		} catch (Exception e){
@@ -47,7 +48,7 @@ public class ReviewServlet extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 
 		String message = "";
 

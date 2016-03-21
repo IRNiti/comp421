@@ -28,11 +28,11 @@ public class ReturnServlet extends HttpServlet {
 	 */
 	public ReturnServlet() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 		try {
 			DriverManager.registerDriver (new org.postgresql.Driver());
 			String url = "jdbc:postgresql://comp421.cs.mcgill.ca:5432/cs421";
-			connection = DriverManager.getConnection(url, "cs421g04", "CarRental#1"); // change both null values to username and password to connect to the db
+			connection = DriverManager.getConnection(url, null, null); // change both null values to username and password to connect to the db
 			statement = connection.createStatement() ;
 
 		} catch (Exception e){
@@ -44,7 +44,7 @@ public class ReturnServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 
 		String rID = request.getParameter("reservationID");
 		String branchAddress = request.getParameter("branchAddress");
@@ -88,8 +88,7 @@ public class ReturnServlet extends HttpServlet {
 						+ "From \"cs421g04\".\"Reservations\" INNER JOIN \"cs421g04\".\"Vehicles\" on \"Reservations\".\"vID\" = \"Vehicles\".\"vID\""
 						+ "where \"Reservations\".\"rID\" = "+rID+")";
 				
-				
-				System.out.println ( insertSQL ) ;
+		
 				statement.executeUpdate ( insertSQL ) ;
 				message = "updated vehicle branch to "+bId;
 
@@ -128,7 +127,7 @@ public class ReturnServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 	}
 
 	private int getBranchId(String address) {

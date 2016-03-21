@@ -26,13 +26,11 @@ public class LoginServlet extends HttpServlet {
      */
     public LoginServlet() {
         super();
-        // TODO Auto-generated constructor stub
+       
         try {
         	DriverManager.registerDriver (new org.postgresql.Driver());
-//            String url = "jdbc:postgresql://comp421.cs.mcgill.ca:5432/cs421";
-//            connection = DriverManager.getConnection (url, null, null); // change both null values to username and password to connect to the db
-			String url = "jdbc:postgresql://10.0.1.8:5432/CarRental";
-			connection = DriverManager.getConnection(url, "pi", "nguyen");
+            String url = "jdbc:postgresql://comp421.cs.mcgill.ca:5432/cs421";
+            connection = DriverManager.getConnection (url, null, null); // change both null values to username and password to connect to the db
         } catch (Exception e){
         	e.printStackTrace();
         }
@@ -42,14 +40,14 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		String email = request.getParameter("emailAddress");
 		User user = this.getUser(email);
 		if (user != null) {

@@ -29,11 +29,11 @@ public class ReservationServlet extends HttpServlet {
      */
     public ReservationServlet() {
         super();
-        // TODO Auto-generated constructor stub
+       
         try {
         	DriverManager.registerDriver (new org.postgresql.Driver());
             String url = "jdbc:postgresql://comp421.cs.mcgill.ca:5432/cs421";
-            connection = DriverManager.getConnection (url, "cs421g04", "CarRental#1"); // change both null values to username and password to connect to the db     
+            connection = DriverManager.getConnection (url, null, null); // change both null values to username and password to connect to the db     
         } catch (Exception e){
         	e.printStackTrace();
         }
@@ -43,7 +43,7 @@ public class ReservationServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 	}
 
 	/**
@@ -142,7 +142,7 @@ public class ReservationServlet extends HttpServlet {
 				response.getWriter().write(jsonResponse);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 	}
@@ -159,7 +159,7 @@ public class ReservationServlet extends HttpServlet {
 				}
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		return true;

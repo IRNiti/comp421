@@ -27,7 +27,7 @@ public class VehicleServlet extends HttpServlet {
      */
     public VehicleServlet() {
         super();
-        // TODO Auto-generated constructor stub
+       
         try {
         	DriverManager.registerDriver (new org.postgresql.Driver());
             String url = "jdbc:postgresql://comp421.cs.mcgill.ca:5432/cs421";
@@ -41,13 +41,14 @@ public class VehicleServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		String branchAddress = request.getParameter("branchAddress");
 		String showAllVehicles = request.getParameter("all");
 		String tableName = "\"cs421g04\"" + "." + "\"Vehicles\"";
 		int branchId = this.getBranchId(branchAddress);
 		ArrayList<Vehicle> vehicles = new ArrayList<Vehicle>();
-		if (showAllVehicles != null) { // return all cars
+		// return all cars
+		if (showAllVehicles != null) { 
 			String getVehicles = String.format("SELECT * FROM %s", tableName, branchId);
 			try {
 				Statement statement = this.connection.createStatement();
@@ -99,7 +100,7 @@ public class VehicleServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 	}
 	
 	private int getBranchId(String address) {
