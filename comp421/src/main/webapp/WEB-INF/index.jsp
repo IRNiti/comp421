@@ -25,6 +25,11 @@
     <h2>Make a Reservation</h2>
     <form id="reserveForm">
     <fieldset class="form-group">
+      <label for="licenseNumber">License Number</label>
+      <input name="licenseNumber"type="text" class="form-control" id="licenseNumber" placeholder="Enter License Number">
+      <small class="text-muted"></small>
+    </fieldset>
+    <fieldset class="form-group">
     <label for="exampleSelect1">Branches</label>
     <select name="branch"class="form-control" id="exampleSelect1">
       <option id="1">475 President Kennedy</option>
@@ -50,16 +55,17 @@
   <fieldset class="form-group">
     <label for="exampleSelect3">Insurance policy</label>
     <select name="insurance"class="form-control" id="exampleSelect3">
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
-      <option>5</option>
+      <option>N/A</option>
+      <option>loss-damage waiver</option>
+      <option>liability coverage</option>
+      <option>personal accident insurance</option>
+      <option>personal effects coverage</option>
     </select>
   </fieldset>
   
   </form>
   <button id="makeReservationButton" class="btn btn-primary">Reserve!</button>
+  <button id="ReservationBackButton" class="btn btn-primary">Back</button>
   
 
   </div>
@@ -223,6 +229,31 @@
                }
            });
     	});
+    $('ReservationBackButton').click(function() {
+    		      $('#mainPage').show();
+    		      $('#Reserve').hide();
+    		    }
+    		);
+    
+    $('#makeReservationButton').click( function() {
+        debugger;
+        $.ajax({
+            cache: false,
+            url: 'http://localhost:8080/comp421/reserve',
+            type: 'post',
+            dataType:'text',
+            data: $('#reserveForm').serialize(),
+            success: function()
+            {
+              
+            },
+            complete: function(data){
+            	
+            }
+        });
+
+        
+    });
    
 
     </script>
