@@ -300,7 +300,9 @@
               
             },
             complete: function(data){
-            	
+            	alert("Reservation made ");
+            $('#mainPage').show();
+   		      $('#Reserve').hide();
             }
         });
 
@@ -387,6 +389,11 @@
     $('#returnButton').click(function() {
 	      $('#mainPage').hide();
 	      $('#return').show();
+	    }
+	);
+    $('#ReturnBackButton').click(function() {
+	      $('#mainPage').show();
+	      $('#return').hide();
 	    }
 	);
     
