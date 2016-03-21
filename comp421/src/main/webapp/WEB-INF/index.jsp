@@ -41,11 +41,11 @@
   </fieldset>
   <fieldset class="form-group">
       <label for="pickupDate">Input pickup date dd/mm/yyyy</label>
-      <input name="" type="date" class="form-control" id="pickupDate" placeholder="dd/mm/yyyy">
+      <input name="pickupDate" type="date" class="form-control" id="pickupDate" placeholder="dd/mm/yyyy">
     </fieldset>
     <fieldset class="form-group">
       <label for="dropOffDate">Input dropOff date dd/mm/yyyy</label>
-      <input name="" type="date" class="form-control" id="dropOffDate" placeholder="dd/mm/yyyy">
+      <input name="dropOffDate" type="date" class="form-control" id="dropOffDate" placeholder="dd/mm/yyyy">
     </fieldset>
     <fieldset class="form-group">
     <label for="exampleSelect2">Vehicles</label>
@@ -223,7 +223,7 @@
                	cars = JSON.parse(data.responseText);
                 $('#exampleSelect2').html("");
                	for (var i = 0; cars.length; i++) {
-               	    $('#exampleSelect2').append(" <option>"+cars[i].make+":"+ cars[i].model+":"+cars[i].costPerDay+"</option>");
+               	    $('#exampleSelect2').append(" <option>"+cars[i].make+":"+ cars[i].model+":"+cars[i].costPerDay+":"+cars[i].vId+"</option>");
                	}
                	
                }
@@ -237,12 +237,16 @@
     
     $('#makeReservationButton').click( function() {
         debugger;
+        var resData = $('#reserveForm').serialize();
+        var selected = $('#exampleSelect2 option:selected').val().split(":")[3];
+        resData.push({name: 'vId', value:selected });
+        resData.push({name: 'uId', value:user.uID});
         $.ajax({
             cache: false,
             url: 'http://localhost:8080/comp421/reserve',
             type: 'post',
             dataType:'text',
-            data: $('#reserveForm').serialize(),
+            data: resData,
             success: function()
             {
               
