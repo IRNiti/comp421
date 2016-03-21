@@ -45,3 +45,35 @@ INSERT INTO "Promotions" (pid, info) VALUES (6, '<promotion>
 	<enddate>2016-4-20</enddate>
 	<percentoff>10</percentoff>
 </promotion>');
+
+UPDATE "cs421g04"."Reservations"
+SET "promotion" = 1
+WHERE "rID" = 9;
+
+UPDATE "cs421g04"."Reservations"
+SET "promotion" = 1
+WHERE "rID" = 11;
+
+UPDATE "cs421g04"."Reservations"
+SET "promotion" = 2
+WHERE "rID" = 20;
+
+UPDATE "cs421g04"."Reservations"
+SET "promotion" = 3
+WHERE "rID" = 16;
+
+UPDATE "cs421g04"."Reservations"
+SET "promotion" = 4
+WHERE "rID" = 19;
+
+UPDATE "cs421g04"."Reservations"
+SET "promotion" = 4
+WHERE "rID" = 27;
+
+UPDATE "cs421g04"."Reservations"
+SET "promotion" = 5
+WHERE "rID" = 3;
+
+UPDATE "cs421g04"."Reservations"
+SET "promotion" = 6
+WHERE "rID" = 1;

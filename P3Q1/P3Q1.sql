@@ -17,13 +17,13 @@ FOREIGN KEY (promotion) REFERENCES "Promotions" (pid);
 SELECT name
 FROM "Reservations" r, "Users" u
 WHERE r."uID" = u."uID"
-      AND r.promotion IN (SELECT pid
-                          FROM "Promotions"
-                          WHERE
+    AND r.promotion IN (SELECT pid
+                        FROM "Promotions"
+                        WHERE
                             to_date(xpath('/promotion/startdate/text()', info) :: TEXT, '{YYYY-MM-DD}') < current_date);
 
 
--- Select pid of Promotions that offer a discount of more than 5% off
+-- Select pid of Promotions that offer a discount of more than 10% off
 SELECT pid
 FROM "Promotions"
-WHERE (((((xpath('/promotion/percentoff/text()', info)) [1]) :: TEXT) :: INTEGER)) > 5;
+WHERE (((((xpath('/promotion/percentoff/text()', info)) [1]) :: TEXT) :: INTEGER)) > 10;
