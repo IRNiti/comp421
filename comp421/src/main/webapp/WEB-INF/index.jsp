@@ -20,6 +20,18 @@
 <body>
 <h1>COMP-421 Database Project</h1>
 
+<div class="row" id="return" style="display:none">
+  <div class="col-xs-8 col-md-8">
+    <h2>Return a car</h2>
+    <form id="returnForm">
+  </form>
+  <button id="makeReturnButton" class="btn btn-primary">Return</button>
+  <button id="ReturnBackButton" class="btn btn-primary">Back</button>
+  </div>
+</div>
+
+
+
 <div class="row" id="Reserve" style="display:none">
   <div class="col-xs-8 col-md-8">
     <h2>Make a Reservation</h2>
@@ -67,6 +79,8 @@
   <button id="ReservationBackButton" class="btn btn-primary">Back</button>
   </div>
 </div>
+
+
 <div class="row" id="review" style="display:none">
   <div class="col-xs-8 col-md-8">
     <h2>Submit A Review</h2>
@@ -150,7 +164,7 @@
 </div>
 
 </div>
-<h2> ${name} ${address} ${email} ${isPremium} ${points}</h2>
+
 <script type="text/javascript">
 
     $('#submitButton').click( function() {
@@ -369,6 +383,12 @@
 
         
     });
+    
+    $('#returnButton').click(function() {
+	      $('#mainPage').hide();
+	      $('#return').show();
+	    }
+	);
     
     
    
