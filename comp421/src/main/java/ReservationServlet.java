@@ -3,9 +3,9 @@ package main.java;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
@@ -62,7 +62,6 @@ public class ReservationServlet extends HttpServlet {
 		boolean isReturned = false;//request.getParameter("isReturned");
 		int userId = Integer.parseInt(request.getParameter("uId"));
 		int vehicleId = Integer.parseInt(request.getParameter("vId"));
-		String getNextReservationId = "SELECT nextval('unique_rid')";
 		String insurance = request.getParameter("insurance");
 		
 		try {
@@ -86,19 +85,48 @@ public class ReservationServlet extends HttpServlet {
 				,tableName, licenseNumber, pickUpDateFormatted, returnDateFormatted, isReturned, userId, vehicleId, insurance);		
 		Statement statement;
 		try {
-			statement = this.connection.createStatement();
-			statement.executeUpdate(insertStatement);
-			String jsonResponse = new Gson().toJson(Collections.singletonMap("return", 0));
-			response.setContentType("application/json");
-			response.setCharacterEncoding("UTF-8");
-			response.getWriter().write(jsonResponse);
-			statement.close();
-			this.connection.close();
-			return;
+			if (this.canReserve(pickUpDateFormatted, vehicleId)) {
+				statement = this.connection.createStatement();
+				statement.executeUpdate(insertStatement);
+				String jsonResponse = new Gson().toJson(Collections.singletonMap("return", 0));
+				response.setContentType("application/json");
+				response.setCharacterEncoding("UTF-8");
+				response.getWriter().write(jsonResponse);
+				statement.close();
+				this.connection.close();
+				return;
+			} else {
+				String jsonResponse = new Gson().toJson(Collections.singletonMap("return", -1));
+				response.setContentType("application/json");
+				response.setCharacterEncoding("UTF-8");
+				response.getWriter().write(jsonResponse);
+				this.connection.close();
+				return;
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+	}
+	
+	private boolean canReserve(Date pickUpDate, int vehicleId) {
+		String tableName = "\"cs421g04\"" + "." + "\"Reservations\"";
+		String query = String.format("SELECT \"returnDate\" FROM %s WHERE \"vID\"=%d", tableName, vehicleId);
+		try {
+			Statement statement = this.connection.createStatement();
+			ResultSet rs = statement.executeQuery(query);
+			while (rs.next()) {
+				if (pickUpDate.compareTo(rs.getDate("returnDate")) < 0) {
+					return false;
+				}
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return true;
+		
 	}
 
 }
