@@ -78,6 +78,7 @@
     <button id="reserveButton" class="btn btn-primary">Reserve</button>
     <button id="reviewButton" class="btn btn-primary">Review</button>
     <button id="returnButton" class="btn btn-primary">Return car</button>
+    <button id="deleteAcountButton" class="btn btn-primary">Delete account</button>
   </div>
 </div>
 
@@ -239,8 +240,7 @@
         debugger;
         var resData = $('#reserveForm').serialize();
         var selected = $('#exampleSelect2 option:selected').val().split(":")[3];
-        resData.push({name: 'vId', value:selected });
-        resData.push({name: 'uId', value:user.uID});
+        resData = resData + "&vId=" + selected +"&uId="user.uId;
         $.ajax({
             cache: false,
             url: 'http://localhost:8080/comp421/reserve',
