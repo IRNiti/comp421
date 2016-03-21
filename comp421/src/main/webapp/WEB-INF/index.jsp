@@ -200,7 +200,7 @@
             	cars = JSON.parse(data.responseText);
             	$('#exampleSelect2').html("");
             	for (var i = 0; cars.length; i++) {
-            	    $('#exampleSelect2').append(" <option>"+cars[i].make+":"+ cars[i].model+":"+cars[i].costPerDay+"</option>");
+            	    $('#exampleSelect2').append(" <option>"+cars[i].make+":"+ cars[i].model+":"+cars[i].costPerDay+":"+cars[i].vId+"</option>");
             	}
             	
             }
@@ -240,7 +240,7 @@
         debugger;
         var resData = $('#reserveForm').serialize();
         var selected = $('#exampleSelect2 option:selected').val().split(":")[3];
-        resData = resData + "&vId=" + selected +"&uId="user.uId;
+        resData = resData + "&vId=" + selected +"&uId="+user.uId;
         $.ajax({
             cache: false,
             url: 'http://localhost:8080/comp421/reserve',
