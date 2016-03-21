@@ -61,7 +61,7 @@ public class VehicleServlet extends HttpServlet {
 				Statement statement = this.connection.createStatement();
 				ResultSet rs = statement.executeQuery(getVehicles);
 				while (rs.next()) {
-					vehicles.add(new Vehicle(rs.getInt("vID"), rs.getInt("BID"), rs.getString("make"), rs.getString("model"), rs.getInt("passCapacity"),
+					vehicles.add(new Vehicle(rs.getInt("vID"), rs.getInt("bID"), rs.getString("make"), rs.getString("model"), rs.getInt("passCapacity"),
 							rs.getInt("costPerDay"), rs.getString("type"), rs.getString("transmission")));
 				}
 			} catch (Exception e) {

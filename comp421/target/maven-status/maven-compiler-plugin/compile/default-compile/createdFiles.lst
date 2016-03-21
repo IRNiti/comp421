@@ -1,2 +1,6 @@
-main/java/IndexServlet.class
-main/java/DatabaseServlet.class
+main\java\VehicleServlet.class
+main\java\User.class
+main\java\DatabaseServlet.class
+main\java\IndexServlet.class
+main\java\LoginServlet.class
+main\java\Vehicle.class
