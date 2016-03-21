@@ -83,8 +83,12 @@ public class ReturnServlet extends HttpServlet {
 		//update vehicle branch to new branch
 		if (queryBranch == bId) {
 			try {
-				String insertSQL = "UPDATE \"cs421g04\".\"Vehicles\" SET \"bID\" = "+bId+" WHERE \"rID\" = "+rID;
-
+				String insertSQL = "UPDATE \"cs421g04\".\"Vehicles\" SET \"bID\" = "+bId+" WHERE \"vID\" IN"
+						+ "(SELECT \"Reservations\".\"vID\""
+						+ "From \"cs421g04\".\"Reservations\" INNER JOIN \"cs421g04\".\"Vehicles\" on \"Reservations\".\"vID\" = \"Vehicles\".\"vID\""
+						+ "where \"Reservations\".\"rID\" = "+rID+")";
+				
+				
 				System.out.println ( insertSQL ) ;
 				statement.executeUpdate ( insertSQL ) ;
 				message = "updated vehicle branch to "+bId;
