@@ -27,11 +27,11 @@
     <fieldset class="form-group">
     <label for="exampleSelect1">Branches</label>
     <select name="branch"class="form-control" id="exampleSelect1">
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
-      <option>5</option>
+      <option id="1">475 President Kennedy</option>
+      <option id="2">5960 Boulevard Decarie</option>
+      <option id="3">1717 Rue Berri</option>
+      <option id="4">3480 Boulevard Des Sources</option>
+      <option id="5">1555 Cure Labelle</option>
     </select>
   </fieldset>
   <fieldset class="form-group">
@@ -45,11 +45,6 @@
     <fieldset class="form-group">
     <label for="exampleSelect2">Vehicles</label>
     <select name="car"class="form-control" id="exampleSelect2">
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
-      <option>5</option>
     </select>
   </fieldset>
   <fieldset class="form-group">
@@ -75,16 +70,8 @@
     <h2>Welcome to Number 1 Car Rental!</h2>
     <h2 id="loginName"></h2>
     <button id="reserveButton" class="btn btn-primary">Reserve</button>
-    <button id="reviewButton" class="btn btn-primary">Sign up</button>
+    <button id="reviewButton" class="btn btn-primary">Review</button>
     <button id="returnButton" class="btn btn-primary">Return car</button>
-    <form id="loginForm">
-    <fieldset class="form-group">
-      <label for="exampleInputEmail1">Login with email address</label>
-      <input name="emailAddress" type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-    </fieldset>
-  </form>
-  
-
   </div>
 </div>
 
@@ -150,6 +137,12 @@
         error: function() 
         {
           alert('something went wrong')
+        },
+        complete: function(data){
+        	user = JSON.parse(data.responseText);
+        	$('#mainPage').show();
+        	$('#login').hide();
+        	$('#loginName').html(user.name);
         }
     });
     });
@@ -165,20 +158,72 @@
             data: $('#loginFormBasic').serialize(),
             success: function()
             {
-              alert('success');
+              
             },
             complete: function(data){
-              alert(data);
+            	user = JSON.parse(data.responseText);
+            	$('#mainPage').show();
+            	$('#login').hide();
+            	$('#loginName').html(user.name);
             }
         });
 
         
     });
     $('#signUpButton').click( function() {
-      alert(userName);
       $('#createAccount').show();
       $('#login').hide();
     });
+    $('#reserveButton').click( function() {
+        $('#Reserve').show();
+        $('#mainPage').hide();
+        var selected = $('#exampleSelect1 option:selected').val();
+        $.ajax({
+            cache: false,
+            url: 'http://localhost:8080/comp421/vehicles',
+            type: 'get',
+            dataType:'text',
+            data: '&branchAddress='+selected,
+            success: function()
+            {
+              
+            },
+            complete: function(data){
+            	debugger;
+            	cars = JSON.parse(data.responseText);
+            	$('#exampleSelect2').html("");
+            	for (var i = 0; cars.length; i++) {
+            	    $('#exampleSelect2').append(" <option>"+cars[i].make+":"+ cars[i].model+":"+cars[i].costPerDay+"</option>");
+            	}
+            	
+            }
+        });
+      });
+    
+    $('#exampleSelect1').on('change', function(){
+    	   var selected = $('#exampleSelect1 option:selected').val();
+    	   $.ajax({
+               cache: false,
+               url: 'http://localhost:8080/comp421/vehicles',
+               type: 'get',
+               dataType:'text',
+               data: '&branchAddress='+selected,
+               success: function()
+               {
+                 
+               },
+               complete: function(data){
+               	debugger;
+               	cars = JSON.parse(data.responseText);
+                $('#exampleSelect2').html("");
+               	for (var i = 0; cars.length; i++) {
+               	    $('#exampleSelect2').append(" <option>"+cars[i].make+":"+ cars[i].model+":"+cars[i].costPerDay+"</option>");
+               	}
+               	
+               }
+           });
+    	});
+   
 
     </script>
 </body>
