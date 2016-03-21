@@ -74,4 +74,14 @@
 		<servlet-name>ReservationServlet</servlet-name>
 		<url-pattern>/reserve</url-pattern>
 	</servlet-mapping>
+	<servlet>
+		<description>ReturnServlet</description>
+		<display-name>ReturnServlet</display-name>
+		<servlet-name>ReturnServlet</servlet-name>
+		<servlet-class>main.java.ReturnServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ReturnServlet</servlet-name>
+		<url-pattern>/return</url-pattern>
+	</servlet-mapping>
 </web-app>
