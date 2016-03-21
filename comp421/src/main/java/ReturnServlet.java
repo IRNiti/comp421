@@ -90,7 +90,7 @@ public class ReturnServlet extends HttpServlet {
 		//update vehicle branch to new branch
 		if(queryBranch == bId){
 			try {
-				String insertSQL = "UPDATE \"cs421g04\".\"Vehicles\" SET \"bID\" = "+bId;
+				String insertSQL = "UPDATE \"cs421g04\".\"Vehicles\" SET \"bID\" = "+bId+" WHERE \"rID\" = "+rID;
 
 				System.out.println ( insertSQL ) ;
 				statement.executeUpdate ( insertSQL ) ;
