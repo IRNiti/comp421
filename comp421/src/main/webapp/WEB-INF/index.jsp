@@ -62,15 +62,40 @@
       <option>personal effects coverage</option>
     </select>
   </fieldset>
-  
   </form>
   <button id="makeReservationButton" class="btn btn-primary">Reserve!</button>
   <button id="ReservationBackButton" class="btn btn-primary">Back</button>
-  
-
   </div>
 </div>
-
+<div class="row" id="review" style="display:none">
+  <div class="col-xs-8 col-md-8">
+    <h2>Submit A Review</h2>
+    <form id="reviewForm">
+    
+    <fieldset class="form-group">
+    <label for="exampleSelectReview">Vehicles</label>
+    <select name="car"class="form-control" id="exampleSelectReview">
+    </select>
+  </fieldset>
+  <fieldset class="form-group">
+    <label for="stars">Stars</label>
+    <select name="rating"class="form-control" id="stars">
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+    </select>
+  </fieldset>
+  <div class="form-group">
+  <label for="comment">Review Text</label>
+  <textarea name="text"class="form-control" rows="5" id="comment"></textarea>
+	</div>
+  </form>
+  <button id="submitReviewButton" class="btn btn-primary">Submit</button>
+  <button id="ReviewBackButton" class="btn btn-primary">Back</button>
+  </div>
+</div>
 <div class="row" id="mainPage" style="display:none">
   <div class="col-xs-8 col-md-8">
     <h2>Welcome to Number 1 Car Rental!</h2>
@@ -169,9 +194,18 @@
             },
             complete: function(data){
             	user = JSON.parse(data.responseText);
-            	$('#mainPage').show();
-            	$('#login').hide();
-            	$('#loginName').html(user.name);
+            	if(user.uId == "-1")
+            	{
+            		alert("User Does Not Exist");
+            	}
+            	else
+            	{
+            		$('#mainPage').show();
+                	$('#login').hide();
+                	$('#loginName').html(user.name);
+            	}
+            		
+            	
             }
         });
 
@@ -258,6 +292,85 @@
 
         
     });
+    
+    $('#deleteAcountButton').click( function() {
+        debugger;
+        $.ajax({
+            cache: false,
+            url: 'http://localhost:8080/comp421/delete',
+            type: 'post',
+            dataType:'text',
+            data: "uID="+user.uId,
+            success: function()
+            {
+              
+            },
+            complete: function(data){
+            	user = null;
+            	$('#mainPage').hide();
+            	$('#login').show();
+            }
+        });
+    });
+    
+    $('#reviewButton').click(function() {
+	      $('#mainPage').hide();
+	      $('#review').show();
+	      $.ajax({
+	            cache: false,
+	            url: 'http://localhost:8080/comp421/vehicles',
+	            type: 'get',
+	            dataType:'text',
+	            data: '&all=True',
+	            success: function()
+	            {
+	              
+	            },
+	            complete: function(data){
+	            	debugger;
+	            	cars = JSON.parse(data.responseText);
+	            	$('#exampleSelect2').html("");
+	            	for (var i = 0; cars.length; i++) {
+	            	    $('#exampleSelectReview').append(" <option>"+cars[i].make+":"+ cars[i].model+":"+cars[i].costPerDay+":"+cars[i].vId+"</option>");
+	            	}
+	            	
+	            }
+	        });
+	    }
+	);
+    
+    $('#ReviewBackButton').click(function() {
+	      $('#mainPage').show();
+	      $('#review').hide();
+	    }
+	);
+    
+    $('#submitReviewButton').click( function() {
+        debugger;
+        var resData = $('#reviewForm').serialize();
+        var selected = $('#exampleSelectReview option:selected').val().split(":")[3];
+        resData = resData + "&vId=" + selected +"&uId="+user.uId;
+        $.ajax({
+            cache: false,
+            url: 'http://localhost:8080/comp421/reserve',
+            type: 'post',
+            dataType:'text',
+            data: resData,
+            success: function()
+            {
+              
+            },
+            complete: function(data){
+            	alert("Review submited");
+            	$('#mainPage').show();
+      	      $('#review').hide();
+            }
+        });
+
+        
+    });
+    
+    
    
 
     </script>
