@@ -230,7 +230,7 @@
                }
            });
     	});
-    $('ReservationBackButton').click(function() {
+    $('#ReservationBackButton').click(function() {
     		      $('#mainPage').show();
     		      $('#Reserve').hide();
     		    }
