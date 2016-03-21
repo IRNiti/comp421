@@ -34,8 +34,9 @@ public class ReservationServlet extends HttpServlet {
         	DriverManager.registerDriver (new org.postgresql.Driver());
 //            String url = "jdbc:postgresql://comp421.cs.mcgill.ca:5432/cs421";
 //            connection = DriverManager.getConnection (url, "cs421g04", "CarRental#1"); // change both null values to username and password to connect to the db
-			String url = "jdbc:postgresql://10.0.1.8:5432/CarRental";
-			connection = DriverManager.getConnection(url, "pi", "nguyen");
+			//String url = "jdbc:postgresql://10.0.1.8:5432/CarRental";
+			//connection = DriverManager.getConnection(url, "pi", "nguyen");
+     
         } catch (Exception e){
         	e.printStackTrace();
         }
@@ -58,11 +59,42 @@ public class ReservationServlet extends HttpServlet {
 		Date pickUpDateFormatted = null;
 		Date returnDateFormatted = null;
 		
+		String returnBranch = request.getParameter("dropoffBranchAddress");
 		String licenseNumber = request.getParameter("licenseNumber");
 		boolean isReturned = false;//request.getParameter("isReturned");
 		int userId = Integer.parseInt(request.getParameter("uId"));
 		int vehicleId = Integer.parseInt(request.getParameter("vId"));
 		String insurance = request.getParameter("insurance");
+		int queryBranch;
+		Statement bidStatement = this.connection.createStatement();
+		String message = "";
+		String jsonResponse = "";
+		try{
+			String querySQL = "SELECT \"bID\" FROM \"cs421g04\".\"Branches\" WHERE \"address\" ="+"'"+returnBranch+"'";
+			java.sql.ResultSet rs = bidStatement.executeQuery ( querySQL ) ;
+			
+			while ( rs.next ( ) ) {
+				queryBranch = rs.getInt ( 1 ) ;
+			}
+
+			
+		} catch(SQLException e)
+		{
+
+			message = e.getMessage();
+			jsonResponse = new Gson().toJson(message);
+			response.setContentType("application/json");
+			response.setCharacterEncoding("UTF-8");
+			response.getWriter().write(jsonResponse);
+			return;
+
+		}
+		
+		
+		
+		
+		
+		
 		
 		try {
 			pickUpDateFormatted = formatter.parse(pickUpDate);
@@ -100,6 +132,8 @@ public class ReservationServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		String insertDropOff = "INSERT INTO";
 
 	}
 	

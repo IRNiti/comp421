@@ -26,7 +26,7 @@
     <form id="returnForm">
     <fieldset class="form-group">
     <label for="returnBranch">Branches</label>
-    <select name="branch"class="form-control" id="returnBranch">
+    <select name="branchAddress"class="form-control" id="returnBranch">
       <option id="1">475 President Kennedy</option>
       <option id="2">5960 Boulevard Decarie</option>
       <option id="3">1717 Rue Berri</option>
@@ -35,7 +35,7 @@
     </select>
     <fieldset class="form-group">
       <label for="reservationNumber">Reservation Number</label>
-      <input name="rId"type="text" class="form-control" id="reservationNumber" placeholder="Enter Reservation Number">
+      <input name="reservationID"type="text" class="form-control" id="reservationNumber" placeholder="Enter Reservation Number">
       <small class="text-muted"></small>
     </fieldset>
   </fieldset>
@@ -57,7 +57,7 @@
       <small class="text-muted"></small>
     </fieldset>
     <fieldset class="form-group">
-    <label for="exampleSelect1">Branches</label>
+    <label for="exampleSelect1">Pickup Branch</label>
     <select name="branch"class="form-control" id="exampleSelect1">
       <option id="1">475 President Kennedy</option>
       <option id="2">5960 Boulevard Decarie</option>
@@ -70,6 +70,14 @@
       <label for="pickupDate">Input pickup date dd/mm/yyyy</label>
       <input name="pickupDate" type="date" class="form-control" id="pickupDate" placeholder="dd/mm/yyyy">
     </fieldset>
+    <label for="returnBranch">Dropoff Branch</label>
+    <select name="dropoffBranchAddress"class="form-control" id="returnBranch">
+      <option id="1">475 President Kennedy</option>
+      <option id="2">5960 Boulevard Decarie</option>
+      <option id="3">1717 Rue Berri</option>
+      <option id="4">3480 Boulevard Des Sources</option>
+      <option id="5">1555 Cure Labelle</option>
+    </select>
     <fieldset class="form-group">
       <label for="dropOffDate">Input dropOff date dd/mm/yyyy</label>
       <input name="dropOffDate" type="date" class="form-control" id="dropOffDate" placeholder="dd/mm/yyyy">
@@ -133,6 +141,7 @@
     <button id="reviewButton" class="btn btn-primary">Review</button>
     <button id="returnButton" class="btn btn-primary">Return car</button>
     <button id="deleteAcountButton" class="btn btn-primary">Delete account</button>
+    <button id="LogoutButton" class="btn btn-primary">Log out</button>
   </div>
 </div>
 
@@ -146,6 +155,7 @@
   </form>
   <button id="loginButton" class="btn btn-primary">Login</button>
   <button id="signUpButton" class="btn btn-primary">Sign up</button>
+  
 
   </div>
 </div>
@@ -191,19 +201,17 @@
         data: $('#form').serialize(),
         success: function()
         {
-          alert('success');
-          $('#createAccount').hide();
-          $('#login').show();
+         
         },
         error: function() 
         {
           alert('something went wrong')
         },
         complete: function(data){
-        	user = JSON.parse(data.responseText);
-        	$('#mainPage').show();
-        	$('#login').hide();
-        	$('#loginName').html(user.name);
+        	user = null;
+        	$('#login').show();
+        	$('#createAccount').hide();
+        	
         }
     });
     });
@@ -318,7 +326,7 @@
             	var res = JSON.parse(data.responseText);
             	if(res.result == -1)
             	{
-            		alert("Reservation not made, car not available on those dates ");
+            		alert("Reservation not made, car not available on those dates, or your pickup date is after your dropoff date ");
             	}
             	else
             	{
@@ -349,6 +357,7 @@
             },
             complete: function(data){
             	user = null;
+            	alert("Account deleted");
             	$('#mainPage').hide();
             	$('#login').show();
             }
@@ -435,7 +444,9 @@
                
              },
              complete: function(data){
-             	alert("vehicle returned");
+            	 debugger;
+             	alert(data.responseText);
+             	
              	 $('#mainPage').show();
        	      $('#return').hide();
              }
@@ -444,6 +455,15 @@
 	     
 	    }
 	);
+    $('#LogoutButton').click(function() {
+	      $('#mainPage').hide();
+	      $('#login').show();
+	    });
+    $('#cancelButton').click(function() {
+	      $('#createAccount').hide();
+	      $('#login').show();
+	    });
+    
     
     
     
