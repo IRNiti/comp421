@@ -5,4 +5,4 @@ lost = filter fltrd by elected == 0;
 both =join won by (date,riding,prov), lost by (date,riding,prov);
 close = filter both by (won::votes)-(lost::votes) < 10;
 less = foreach close generate(won::lastname,lost::lastname,won::votes -lost::votes);
-STORE results INTO 'q1';
+STORE less INTO 'q2';
