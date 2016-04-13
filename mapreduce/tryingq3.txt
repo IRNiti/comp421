@@ -1,0 +1,28 @@
+raw = LOAD '/data2/cl03.csv' USING PigStorage(',') AS  (date, type:chararray, parl:int, prov:chararray, riding:chararray, lastname:chararray, firstname:chararray, gender:chararray, occupation:chararray, party:chararray, votes:int, percent:double, elected:int);
+won = filter raw by elected == 1;
+grp = group won by parl;
+odered = order grp by $0 ASC;
+next = filter grp by group == 40;
+now = filter grp by group == 39;
+flatnext = foreach next generate flatten($1);
+j = join flatnext by (firstname,lastname) left outer, flat by (firstname,lastname);
+thenullgroup = group thenull all;
+countofthenull = foreach thenullgroup generate COUNT(thenull);
+
+thenull = filter j by flat::won::firstname is null;
+sol = foreach odered {
+		
+		j = join next.$1 by lastname left outer, $1 by lastname; 
+		generate group;
+}; 
+
+
+my_data = FOREACH grp {
+		GENERATE group;
+}
+my_data = FOREACH grp {
+		flat = filter grp by group == 40;
+		GENERATE group;
+}
+j = join won by (firstname,lastname) left outer, won by (firstname,lastname);
+ /home/cs421g04/pig_1460525328742.log
