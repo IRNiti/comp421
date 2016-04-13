@@ -1,0 +1,21 @@
+(i) 
+	(a)
+		job_1459881653642_3458 had 1 map and 0 reduces
+		job_1459881653642_3460 had 2 maps and 1 reduces
+	(b)
+		after the join its a list of long tuples with attributes of two people in each tuple.
+
+	(c)
+		the query ran for 46144 ms
+		
+(ii)
+	
+	(a)
+		job_1459881653642_3494 had 1 map and o reduces
+		job_1459881653642_3495  had 2 maps and 4 reduces
+	(b)
+		the query ran for 45086 ms
+	(c)
+		When assigning more nodes to computation you would expect to query to run much faster then if only assigning 1. In this case it did but by a very small factor.
+		This can be explained because the parallel command adds more nodes to the reduce stage, but in this query the the map portion is what takes the longest to execute which is why adding more
+		nodes to the reduce does not make that much of a difference. 
