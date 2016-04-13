@@ -1,0 +1,5 @@
+(a) After the group by, the schema looks like grp(parl, members),
+	where parl is the int attribute representing the parliament number
+	and members is the set of all tuples that have this particular value of parl.
+	This is a nested schema, since members is a list.
+(b) The query took 48s to run.
