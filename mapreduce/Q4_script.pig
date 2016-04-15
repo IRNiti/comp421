@@ -3,32 +3,31 @@ raw = LOAD '/data2/cl03.csv' USING PigStorage(',') AS  (date, type:chararray, pa
 -- Get all winners
 winners = FILTER raw by elected == 1;
 
--- Group all winners by parliament
-parliaments = GROUP winners BY parl;
+-- Get rid of useless columns, but keep one extra
+X = FOREACH winners GENERATE party, parl, date;
 
--- Get the # of winners per parliament
-parliament_members = FOREACH parliaments GENERATE group as parl, COUNT(winners) AS count, FLATTEN(winners);
+-- Get the party size for a given party and parliament
+A = GROUP X by (parl, party);
+B = FOREACH A GENERATE $0, COUNT(X) as partySize;
+C = FOREACH B GENERATE FLATTEN($0), partySize;
 
--- Get all winners by party
-parties = GROUP winners BY party;
+-- C = parl, party, partySize
 
--- Get the # of winners per party
-parties_members = FOREACH parties GENERATE group as party, COUNT(winners) AS count2;
+-- Get the parliament size for a given parliament
+D = GROUP X BY parl;
+E = FOREACH D GENERATE $0, COUNT(X) as parlSize;
+F = FOREACH E GENERATE FLATTEN($0), parlSize;
 
---describe parliament_members;
---describe parties_members;
+-- F = parl, parlSize
 
--- Join both tables on the common party
-joined = JOIN parliament_members by winners::party, parties_members by party;
+-- Join
+J = JOIN G by (party, parl), C by (group::party, group::parl);
+K = JOIN J by G::parl, F by group;
 
--- Go through each entry and select necessary fields for output
-total = FOREACH joined GENERATE parliament_members::parl, parties_members::party, parties_members::count2, parliament_members::count;
+-- Format
+P = FOREACH K GENERATE J::G::parl, J::C::group::party, J::C::partySize, F::parlSize;
 
--- Remove duplicates
-unique_total = DISTINCT total;
-
---Dump unique_total;
+Q = DISTINCT P;
 
 -- Write to storage
 STORE unique_total INTO 'q4' USING PigStorage(',');
-   
